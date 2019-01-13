@@ -1,7 +1,6 @@
 package co.recyclesolutions.rmt;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,17 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-public class Activity2 extends AppCompatActivity {
-
-
-    String email;
+public class Activity3 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_2);
+        setContentView(R.layout.activity_3);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -28,56 +23,12 @@ public class Activity2 extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //Colocar o que quer realizar aqui
-
-               // Intent intent = getIntent();
-               // email = intent.getStringExtra("emailC");
-
-                sendEmail();
-
-
-                Snackbar.make(view, "Mandar e-mail!", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
     }
 
-    // Metodos implementados
-
-    // Manda e-mail usando Intent para chamar o aplicativo Email ou outro meio de envio de mesagens (ACTION_SEND)
-
-    public void sendEmail() {
-        String[] TO = {"contato@recyclesolutions.co"}; //E-mail address
-        String[] CC = {"alexandre.cavalcanti@recyclesolutions.co"};
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.setData(Uri.parse("mailto:"));
-        emailIntent.setType("text/plain");
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-        emailIntent.putExtra(Intent.EXTRA_CC, CC);
-        // Change with subject, if desired
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Proposta");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Teste de e-mail!");
-
-        try {
-            startActivity(Intent.createChooser(emailIntent, "Enviar email..."));
-            //finish();
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(Activity2.this,
-                    "Não tem cliente de email instalado!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    // Chama Activity3
-
-    void callAct3(){
-        Intent signup_intent = new Intent(Activity2.this, Activity3.class);
-        startActivity(signup_intent);
-
-    }
-
-
-    ////////////////// Fim dos métodos iplementados
 
     // Cria o menu de opções na barra de ferramentas do aplicativo
 
@@ -88,7 +39,6 @@ public class Activity2 extends AppCompatActivity {
 
         return true;
     }
-
 
     // Cria uma ação para a opção (Menuitem) "Sair" no menu
 
@@ -101,7 +51,7 @@ public class Activity2 extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.SignUp_settings) {
-            callAct3();
+            callAct4();
 
         }
 
@@ -114,6 +64,21 @@ public class Activity2 extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    ///// Implementa vários métodos
+
+
+    // Chama Activity3
+
+    void callAct4(){
+
+        // Descomentar quando criar a Activity4
+        
+        //Intent signup_intent = new Intent(Activity3.this, Activity3.class);
+        //startActivity(signup_intent);
+
     }
 
 
