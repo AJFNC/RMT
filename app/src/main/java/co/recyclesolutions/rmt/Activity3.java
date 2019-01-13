@@ -75,7 +75,7 @@ public class Activity3 extends AppCompatActivity {
     void callAct4(){
 
         // Descomentar quando criar a Activity4
-        
+
         //Intent signup_intent = new Intent(Activity3.this, Activity3.class);
         //startActivity(signup_intent);
 
