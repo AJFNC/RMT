@@ -38,9 +38,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:text=""
+        android:text="Transação"
         android:textAlignment="viewStart"
-        android:textSize="18sp"
+        android:textSize="24dp"
         app:layout_anchorGravity="center"
         tools:layout_height="68dp"
         tools:textSize="24sp" />

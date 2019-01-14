@@ -40,25 +40,28 @@ public class Activity3 extends AppCompatActivity {
 
         TextView textView = (TextView) findViewById(R.id.textView);
 
-        if (action == "s"){
+       // textView.setText(action);
+
+
+        if (action.equals("s")){
             //TextView textView = (TextView) findViewById(R.id.textView);
-            textView.setText("S");
-            System.out.print(action);
+            textView.setText(action);
+            //System.out.print(action);
         }
-        if (action == "b"){
+        if (action.equals("b")){
             //TextView textView = (TextView) findViewById(R.id.textView);
-            textView.setText("B");
-            System.out.print(action);
+            textView.setText(action);
+            //System.out.print(action);
         }
-        if (action == "t"){
+        if (action.equals("t")){
             //TextView textView = (TextView) findViewById(R.id.textView);
-            textView.setText("T");
-            System.out.print(action);
+            textView.setText(action);
+            //System.out.print(action);
         }
-        if (action == "d"){
+        if (action.equals("d")){
             //TextView textView = (TextView) findViewById(R.id.textView);
-            textView.setText("D");
-            System.out.print(action);
+            textView.setText(action);
+            //System.out.print(action);
         }
 
     }
