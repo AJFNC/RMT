@@ -10,7 +10,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
+
+
+// This Activity is to place the buttons regarding: Sell, Buy, Transport and Donate recycling materials
 
 public class Activity2 extends AppCompatActivity {
 
@@ -23,6 +27,50 @@ public class Activity2 extends AppCompatActivity {
         setContentView(R.layout.activity_2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // Mostrar os 4 botoẽs de negociação
+
+        Button button1 = (Button) findViewById(R.id.button1);
+        button1.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        sell();
+                    }
+                }
+        );
+
+        Button button2 = (Button) findViewById(R.id.button2);
+        button2.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        buy();
+                    }
+                }
+        );
+
+        Button button3 = (Button) findViewById(R.id.button3);
+        button3.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        transport();
+                    }
+                }
+        );
+
+        Button button4 = (Button) findViewById(R.id.button4);
+        button4.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        donate();
+                    }
+                }
+        );
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +114,30 @@ public class Activity2 extends AppCompatActivity {
             Toast.makeText(Activity2.this,
                     "Não tem cliente de email instalado!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    // Método para vender
+
+    public void sell(){
+
+    }
+
+    // Método para comprar
+
+    public void buy(){
+
+    }
+
+    // Método para transportar
+
+    public void transport(){
+
+    }
+
+    // Método para doar
+
+    public void donate(){
+
     }
 
     // Chama Activity3

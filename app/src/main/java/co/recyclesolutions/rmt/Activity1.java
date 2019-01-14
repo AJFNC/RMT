@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Handler;
 
 
+// This Activity is to splash the Recycle Solutions screen
+
 public class Activity1 extends AppCompatActivity {
 
 
