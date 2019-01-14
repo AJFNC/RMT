@@ -13,14 +13,15 @@
     <Button
         android:id="@+id/button1"
         android:layout_width="168dp"
-        android:layout_height="wrap_content"
+        android:layout_height="96dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:onClick="sell"
         android:text="Vender"
         android:textColor="@android:color/white"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         tools:layout_width="0" />
@@ -28,28 +29,30 @@
     <Button
         android:id="@+id/button2"
         android:layout_width="168dp"
-        android:layout_height="wrap_content"
+        android:layout_height="96dp"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="4dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:onClick="buy"
         android:text="Comprar"
         android:textColor="@android:color/white"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="168dp"
-        android:layout_height="wrap_content"
+        android:layout_height="96dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:onClick="transport"
         android:text="Transportar"
         android:textColor="@android:color/white"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
         tools:layout_width="wrap_content" />
@@ -57,14 +60,15 @@
     <Button
         android:id="@+id/button4"
         android:layout_width="168dp"
-        android:layout_height="wrap_content"
+        android:layout_height="96dp"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:onClick="donate"
         android:text="Doar"
         android:textColor="@android:color/white"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
@@ -73,13 +77,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="192dp" />
+        app:layout_constraintGuide_begin="207dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="343dp" />
+        app:layout_constraintGuide_begin="410dp" />
 
 </android.support.constraint.ConstraintLayout>

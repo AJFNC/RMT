@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 
 // This Activity is to Sign Up the Costumers
@@ -30,6 +31,36 @@ public class Activity3 extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        // Pega a transação solicitada
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        String action = bundle.getString("trans");
+
+        TextView textView = (TextView) findViewById(R.id.textView);
+
+        if (action == "s"){
+            //TextView textView = (TextView) findViewById(R.id.textView);
+            textView.setText("S");
+            System.out.print(action);
+        }
+        if (action == "b"){
+            //TextView textView = (TextView) findViewById(R.id.textView);
+            textView.setText("B");
+            System.out.print(action);
+        }
+        if (action == "t"){
+            //TextView textView = (TextView) findViewById(R.id.textView);
+            textView.setText("T");
+            System.out.print(action);
+        }
+        if (action == "d"){
+            //TextView textView = (TextView) findViewById(R.id.textView);
+            textView.setText("D");
+            System.out.print(action);
+        }
+
     }
 
 
@@ -79,8 +110,8 @@ public class Activity3 extends AppCompatActivity {
 
         // Descomentar quando criar a Activity4
 
-        //Intent signup_intent = new Intent(Activity3.this, Activity3.class);
-        //startActivity(signup_intent);
+        Intent signup_intent = new Intent(Activity3.this, LoginActivity.class);
+        startActivity(signup_intent);
 
     }
 

@@ -20,6 +20,7 @@ public class Activity2 extends AppCompatActivity {
 
 
     String email;
+    public String transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,31 +120,52 @@ public class Activity2 extends AppCompatActivity {
     // Método para vender
 
     public void sell(){
-
+        transaction = "s";
+        Intent sell_intent = new Intent(Activity2.this, Activity3.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("trans",transaction);
+        sell_intent.putExtras(bundle);
+        startActivity(sell_intent);
     }
 
     // Método para comprar
 
     public void buy(){
-
+        transaction = "b";
+        Intent buy_intent = new Intent(Activity2.this, Activity3.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("trans",transaction);
+        buy_intent.putExtras(bundle);
+        startActivity(buy_intent);
     }
 
     // Método para transportar
 
     public void transport(){
-
+        transaction = "t";
+        Intent transport_intent = new Intent(Activity2.this, Activity3.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("trans",transaction);
+        transport_intent.putExtras(bundle);
+        startActivity(transport_intent);
     }
 
     // Método para doar
 
     public void donate(){
+        transaction = "d";
+        Intent donate_intent = new Intent(Activity2.this, Activity3.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("trans",transaction);
+        donate_intent.putExtras(bundle);
+        startActivity(donate_intent);
 
     }
 
     // Chama Activity3
 
     void callAct3(){
-        Intent signup_intent = new Intent(Activity2.this, Activity3.class);
+        Intent signup_intent = new Intent(Activity2.this, LoginActivity.class);
         startActivity(signup_intent);
 
     }

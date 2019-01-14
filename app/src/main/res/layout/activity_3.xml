@@ -32,4 +32,17 @@
         app:backgroundTint="@color/colorPrimaryDark"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:text=""
+        android:textAlignment="viewStart"
+        android:textSize="18sp"
+        app:layout_anchorGravity="center"
+        tools:layout_height="68dp"
+        tools:textSize="24sp" />
+
 </android.support.design.widget.CoordinatorLayout>
