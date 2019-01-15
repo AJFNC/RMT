@@ -33,6 +33,10 @@
         <activity
             android:name=".Activity3"
             android:label="@string/title_activity_3"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RegisterActivity"
+            android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

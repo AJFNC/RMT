@@ -3,6 +3,7 @@ package co.recyclesolutions.rmt;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -33,6 +34,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
+
+
+// This Activity is the Sign In and the pre-Sign Up class
 
 /**
  * A login screen that offers login via email/password.
@@ -324,6 +328,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
             // TODO: register the new account here.
+
+            Intent reg_intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("email", mEmail);
+            bundle.putString("password", mPassword);
+            reg_intent.putExtras(bundle);
+            startActivity(reg_intent);
+
             return true;
         }
 

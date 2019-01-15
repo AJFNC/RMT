@@ -83,7 +83,7 @@ public class Activity2 extends AppCompatActivity {
                // Intent intent = getIntent();
                // email = intent.getStringExtra("emailC");
 
-                sendEmail();
+               // sendEmail();
 
 
                 Snackbar.make(view, "Mandar e-mail!", Snackbar.LENGTH_LONG)
@@ -92,30 +92,11 @@ public class Activity2 extends AppCompatActivity {
         });
     }
 
+
+
     // Metodos implementados
 
-    // Manda e-mail usando Intent para chamar o aplicativo Email ou outro meio de envio de mesagens (ACTION_SEND)
 
-    public void sendEmail() {
-        String[] TO = {"contato@recyclesolutions.co"}; //E-mail address
-        String[] CC = {"alexandre.cavalcanti@recyclesolutions.co"};
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.setData(Uri.parse("mailto:"));
-        emailIntent.setType("text/plain");
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-        emailIntent.putExtra(Intent.EXTRA_CC, CC);
-        // Change with subject, if desired
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Proposta");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Teste de e-mail!");
-
-        try {
-            startActivity(Intent.createChooser(emailIntent, "Enviar email..."));
-            //finish();
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(Activity2.this,
-                    "Não tem cliente de email instalado!", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     // Método para vender
 
