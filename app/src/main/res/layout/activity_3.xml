@@ -43,6 +43,7 @@
         android:textSize="24dp"
         app:layout_anchorGravity="center"
         tools:layout_height="68dp"
-        tools:textSize="24sp" />
+        tools:textSize="24sp"
+        tools:ignore="RtlCompat" />
 
 </android.support.design.widget.CoordinatorLayout>

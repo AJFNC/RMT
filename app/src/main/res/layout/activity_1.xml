@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:src="@drawable/rs1"
-        android:fitsSystemWindows="true"/>
+        android:fitsSystemWindows="true"
+        tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>

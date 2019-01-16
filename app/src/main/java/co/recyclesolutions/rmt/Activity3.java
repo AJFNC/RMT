@@ -109,7 +109,7 @@ public class Activity3 extends AppCompatActivity {
 
     // Chama Activity3
 
-    void callAct4(){
+    private void callAct4(){
 
         // Descomentar quando criar a Activity4
 

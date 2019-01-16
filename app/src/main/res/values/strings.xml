@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">RMT</string>
-    <string name="title_activity_login">Fazer login</string>
+    <string name="title_activity_login">Identificação</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Senha (opcional)</string>
-    <string name="action_sign_in">Fazer login ou cadastrar-se</string>
+    <string name="prompt_password">Senha</string>
+    <string name="action_sign_in">Log in ou cadastrar-se</string>
     <string name="action_sign_in_short">Log in</string>
     <string name="error_invalid_email">Esse email é inválido! Cadastre-se</string>
     <string name="error_invalid_password">A senha tem que ter 6 dígitos no mínimo</string>

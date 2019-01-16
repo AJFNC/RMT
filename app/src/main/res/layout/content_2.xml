@@ -10,6 +10,7 @@
     tools:context=".Activity2"
     tools:showIn="@layout/activity_2">
 
+    <!--suppress AndroidDomInspection -->
     <Button
         android:id="@+id/button1"
         android:layout_width="168dp"
@@ -18,13 +19,13 @@
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:onClick="sell"
         android:text="Vender"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        tools:layout_width="0" />
+        tools:layout_width="0"
+        tools:ignore="RtlHardcoded" />
 
     <Button
         android:id="@+id/button2"
@@ -34,12 +35,12 @@
         android:layout_marginStart="4dp"
         android:layout_marginBottom="4dp"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:onClick="buy"
         android:text="Comprar"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline" />
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        tools:ignore="OnClick,RtlHardcoded" />
 
     <Button
         android:id="@+id/button3"
@@ -49,13 +50,13 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:onClick="transport"
         android:text="Transportar"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        tools:layout_width="wrap_content" />
+        tools:layout_width="wrap_content"
+        tools:ignore="OnClick,RtlHardcoded" />
 
     <Button
         android:id="@+id/button4"
@@ -65,12 +66,12 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:onClick="donate"
         android:text="Doar"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        tools:ignore="OnClick,RtlHardcoded" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"

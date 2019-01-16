@@ -19,8 +19,8 @@ import android.widget.Toast;
 public class Activity2 extends AppCompatActivity {
 
 
-    String email;
-    public String transaction;
+
+    private String transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,23 +73,6 @@ public class Activity2 extends AppCompatActivity {
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //Colocar o que quer realizar aqui
-
-               // Intent intent = getIntent();
-               // email = intent.getStringExtra("emailC");
-
-               // sendEmail();
-
-
-                Snackbar.make(view, "Mandar e-mail!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
 
@@ -100,7 +83,7 @@ public class Activity2 extends AppCompatActivity {
 
     // Método para vender
 
-    public void sell(){
+    private void sell(){
         transaction = "s";
         Intent sell_intent = new Intent(Activity2.this, Activity3.class);
         Bundle bundle = new Bundle();
@@ -111,7 +94,7 @@ public class Activity2 extends AppCompatActivity {
 
     // Método para comprar
 
-    public void buy(){
+    private void buy(){
         transaction = "b";
         Intent buy_intent = new Intent(Activity2.this, Activity3.class);
         Bundle bundle = new Bundle();
@@ -122,7 +105,7 @@ public class Activity2 extends AppCompatActivity {
 
     // Método para transportar
 
-    public void transport(){
+    private void transport(){
         transaction = "t";
         Intent transport_intent = new Intent(Activity2.this, Activity3.class);
         Bundle bundle = new Bundle();
@@ -133,7 +116,7 @@ public class Activity2 extends AppCompatActivity {
 
     // Método para doar
 
-    public void donate(){
+    private void donate(){
         transaction = "d";
         Intent donate_intent = new Intent(Activity2.this, Activity3.class);
         Bundle bundle = new Bundle();
@@ -145,7 +128,7 @@ public class Activity2 extends AppCompatActivity {
 
     // Chama Activity3
 
-    void callAct3(){
+    private void callAct3(){
         Intent signup_intent = new Intent(Activity2.this, LoginActivity.class);
         startActivity(signup_intent);
 

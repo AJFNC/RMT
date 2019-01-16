@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 // Classe para enviar e-mail
 
-public class SendEmail {
+class SendEmail {
 
     public void sendEmail(Activity act) {
         String[] TO = {"contato@recyclesolutions.co"}; //E-mail address
