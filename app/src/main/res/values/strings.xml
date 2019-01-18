@@ -19,5 +19,16 @@
     <string name="title_activity_3">Proposta</string>
     <string name="title_activity_register">Cadastro</string>
 
+    <string name="text_msg">Mensagem</string>
+    <string name="text_pass">Senha</string>
+    <string name="text_email">Nome</string>
+
+    <string name="text_error_connection">Problema de conexão!</string>
+
+    <string name="trans_sell">Vender</string>
+    <string name="trans_buy">Comprar</string>
+    <string name="trans_transport">Transportar</string>
+    <string name="trans_donate">Doar</string>
+
     ,
 </resources>

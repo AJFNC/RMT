@@ -11,8 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+// Para uso futuro
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+//
+
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -30,12 +33,16 @@ public class RegisterActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         String rEmail = bundle.getString("email");
         String rPass = bundle.getString("password");
+        String rBuffer = bundle.getString("msg");
 
-        TextView textViewEmail = (TextView) findViewById(R.id.textViewEmail);
-        TextView textViewPass = (TextView) findViewById(R.id.textViewPass);
 
-        textViewEmail.setText(rEmail);
-        textViewPass.setText(rPass);
+        //TextView textViewEmail = (TextView) findViewById(R.id.textViewEmail);
+        //TextView textViewPass = (TextView) findViewById(R.id.textViewPass);
+        TextView textViewMsg = (TextView) findViewById(R.id.textViewMsg);
+
+        //textViewEmail.setText(rEmail);
+       // textViewPass.setText(rPass);
+        textViewMsg.setText(rBuffer);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

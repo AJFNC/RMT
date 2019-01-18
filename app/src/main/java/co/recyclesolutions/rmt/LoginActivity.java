@@ -30,8 +30,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -47,6 +56,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
+
+    /////
+
+    String email;
+    String password;
+
+
+    ///
+
+
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -157,8 +176,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        email = mEmailView.getText().toString();
+        password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -196,7 +215,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+
+        if (email.contains(" "))
+            return false;
+        else
+            return true;
     }
 
     private boolean isPasswordValid(String password) {
@@ -302,6 +325,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
+        private String strBuffer;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -312,31 +336,55 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
+
+            String link = "http://192.168.1.176/loginpost.php";
+
+
             try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
+
+
+                String data = URLEncoder.encode("username", "UTF-8") + "=" +
+                        URLEncoder.encode(mEmail, "UTF-8");
+                data += "&" + URLEncoder.encode("password", "UTF-8") + "=" +
+                        URLEncoder.encode(mPassword, "UTF-8");
+
+
+                URL url = new URL(link);
+                URLConnection conn = url.openConnection();
+
+
+                conn.setDoOutput(true);
+
+                OutputStreamWriter wrStrm = new OutputStreamWriter(conn.getOutputStream());
+
+
+                wrStrm.write(data);
+                wrStrm.flush();
+
+
+                BufferedReader rdStrm = new BufferedReader(new
+                        InputStreamReader(conn.getInputStream()));
+
+                StringBuilder sbuffer = new StringBuilder();
+                String line;
+
+
+                // Read Server Response
+                while ((line = rdStrm.readLine()) != null) {
+                    sbuffer.append(line);
+                    break;
+                }
+                strBuffer = sbuffer.toString();
+
+                return true;
+
+
+            } catch (IOException e) {
+                //strBuffer = new String("Exception: " + e.getMessage());
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
 
-            // TODO: register the new account here.
-
-            Intent reg_intent = new Intent(LoginActivity.this, RegisterActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putString("email", mEmail);
-            bundle.putString("password", mPassword);
-            reg_intent.putExtras(bundle);
-            startActivity(reg_intent);
-
-            return true;
         }
 
         @Override
@@ -345,10 +393,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
+                // TODO: register the new account here.
+
+                Intent reg_intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                Bundle bundleRA = new Bundle();
+                bundleRA.putString("email", mEmail);
+                bundleRA.putString("password", mPassword);
+                bundleRA.putString("msg", strBuffer);
+                reg_intent.putExtras(bundleRA);
+                startActivity(reg_intent);
+
+
+
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                mPasswordView.setError(getString(R.string.text_error_connection));
                 mPasswordView.requestFocus();
+
             }
         }
 
