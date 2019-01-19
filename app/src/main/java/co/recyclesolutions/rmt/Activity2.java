@@ -85,11 +85,11 @@ public class Activity2 extends AppCompatActivity {
 
     private void sell(){
         transaction = "s";
-        Intent sell_intent = new Intent(Activity2.this, LoginActivity.class);
+        Intent log_intent = new Intent(Activity2.this, LoginActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("trans",transaction);
-        sell_intent.putExtras(bundle);
-        startActivity(sell_intent);
+        log_intent.putExtras(bundle);
+        startActivity(log_intent);
     }
 
     // Método para comprar
@@ -130,6 +130,9 @@ public class Activity2 extends AppCompatActivity {
 
     private void callAct3(){
         Intent signup_intent = new Intent(Activity2.this, LoginActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("trans",transaction);
+        signup_intent.putExtras(bundle);
         startActivity(signup_intent);
 
     }

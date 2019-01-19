@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     String email;
     String password;
+    String actionL;
 
 
     ///
@@ -104,6 +105,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
         });
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        actionL = bundle.getString("trans");
+
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -400,6 +406,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 bundleRA.putString("email", mEmail);
                 bundleRA.putString("password", mPassword);
                 bundleRA.putString("msg", strBuffer);
+                bundleRA.putString("action", actionL);
                 reg_intent.putExtras(bundleRA);
                 startActivity(reg_intent);
 

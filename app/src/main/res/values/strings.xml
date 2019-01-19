@@ -30,5 +30,7 @@
     <string name="trans_transport">Transportar</string>
     <string name="trans_donate">Doar</string>
 
+    <string name="reg_button">Enviar</string>
+
     ,
 </resources>

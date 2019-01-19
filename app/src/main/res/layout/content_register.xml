@@ -12,10 +12,30 @@
 
     <TextView
         android:id="@+id/textViewMsg"
-        android:layout_width="419dp"
-        android:layout_height="277dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="383dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="4dp"
         android:text="@string/text_msg"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="16dp" />
+
+    <Button
+        android:id="@+id/buttonAttemptReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="440dp"
+        android:text="@string/reg_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMsg" />
+
+    <TextView
+        android:id="@+id/textViewMsg_Sending"
+        android:layout_width="129dp"
+        android:layout_height="0dp"
+
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAttemptReg" />
 </android.support.constraint.ConstraintLayout>
