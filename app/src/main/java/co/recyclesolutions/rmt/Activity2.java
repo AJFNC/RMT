@@ -85,7 +85,7 @@ public class Activity2 extends AppCompatActivity {
 
     private void sell(){
         transaction = "s";
-        Intent sell_intent = new Intent(Activity2.this, Activity3.class);
+        Intent sell_intent = new Intent(Activity2.this, LoginActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("trans",transaction);
         sell_intent.putExtras(bundle);

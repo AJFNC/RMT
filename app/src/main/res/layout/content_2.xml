@@ -38,14 +38,12 @@
         android:layout_alignParentRight="true"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="@string/trans_buy"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline5"
         tools:ignore="OnClick,RtlHardcoded" />
@@ -77,14 +75,12 @@
         android:layout_alignParentRight="true"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="@string/trans_donate"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
         tools:ignore="OnClick,RtlHardcoded" />
@@ -94,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="182dp" />
+        app:layout_constraintGuide_begin="209dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
@@ -109,13 +105,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="0dp" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="0dp"
-        android:layout_height="match_constraint"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="363dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline5"

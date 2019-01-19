@@ -337,7 +337,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // TODO: attempt authentication against a network service.
 
 
-            String link = "http://192.168.1.176/loginpost.php";
+            String link = "http://192.168.1.176/loginuser.php";
 
 
             try {
@@ -395,15 +395,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (success) {
                 // TODO: register the new account here.
 
-                Intent reg_intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                Intent reg_intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 Bundle bundleRA = new Bundle();
                 bundleRA.putString("email", mEmail);
                 bundleRA.putString("password", mPassword);
                 bundleRA.putString("msg", strBuffer);
                 reg_intent.putExtras(bundleRA);
                 startActivity(reg_intent);
-
-
 
                 finish();
             } else {

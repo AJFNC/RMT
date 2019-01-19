@@ -2,7 +2,7 @@
     <string name="app_name">RMT</string>
     <string name="title_activity_login">Identificação</string>
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
+    <string name="prompt_email">ID</string>
     <string name="prompt_password">Senha</string>
     <string name="action_sign_in">Log in ou cadastrar-se</string>
     <string name="action_sign_in_short">Log in</string>

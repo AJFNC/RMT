@@ -12,8 +12,8 @@ import android.view.View;
 import android.widget.TextView;
 
 // Para uso futuro
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+//import android.database.sqlite.SQLiteDatabase;
+//import android.database.sqlite.SQLiteOpenHelper;
 //
 
 
@@ -42,7 +42,21 @@ public class RegisterActivity extends AppCompatActivity {
 
         //textViewEmail.setText(rEmail);
        // textViewPass.setText(rPass);
-        textViewMsg.setText(rBuffer);
+        //textViewMsg.setText(rBuffer);
+
+        String text1 = "O usuário não existe!";
+
+        // Usar a mensagem de retorno do servidor para criar novo usuário ou liberar acesso
+
+
+        if (rBuffer.equals(rEmail)) {
+
+            textViewMsg.setText(rBuffer);
+
+        }
+        else{
+            textViewMsg.setText(text1);
+        }
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
