@@ -21,7 +21,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_3" />
+    <include
+        layout="@layout/content_3"
+        tools:layout_height="wrap_content" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -35,15 +37,15 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:text="Transação"
+        android:text="@string/trans_action"
         android:textAlignment="viewStart"
-        android:textSize="24dp"
-        app:layout_anchorGravity="center"
+        tools:ignore="RtlCompat"
         tools:layout_height="68dp"
-        tools:textSize="24sp"
-        tools:ignore="RtlCompat" />
+        tools:textSize="24sp" />
+
+
 
 </android.support.design.widget.CoordinatorLayout>

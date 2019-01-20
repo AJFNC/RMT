@@ -21,10 +21,17 @@
 
     <string name="text_msg">Mensagem</string>
     <string name="text_pass">Senha</string>
-    <string name="text_email">Nome</string>
+    <string name="text_rep_pass">Repita a senha</string>
+    <string name="text_email">Email</string>
+    <string name="text_name">Nome</string>
+    <string name="text_surname">Sobrenome</string>
+    <string name="text_phone">Whatsapp</string>
+    <string name="text1">O usuário não existe!</string>
+    <string name="text2">Cadastrando usuário!</string>
 
     <string name="text_error_connection">Problema de conexão!</string>
 
+    <string name="trans_action">Transação</string>
     <string name="trans_sell">Vender</string>
     <string name="trans_buy">Comprar</string>
     <string name="trans_transport">Transportar</string>

@@ -62,17 +62,17 @@ public class RegisterActivity extends AppCompatActivity {
 
             textViewMsg.setText(rBuffer);
 
-            /**
+
 
             // Como o usuário está cadastrado dar u Itent na Activity escolhida
 
-            Intent sell_intent = new Intent(RegisterActivity.this, Activity3.class);
+            Intent sell_intent = new Intent(this, Activity3.class);
             Bundle bundleS = new Bundle();
-            bundleS.putString("trans",rAction);
-            sell_intent.putExtras(bundle);
+            bundleS.putString("trans","s");
+            sell_intent.putExtras(bundleS);
             startActivity(sell_intent);
 
-            */
+
 
         }
         else{
@@ -86,36 +86,13 @@ public class RegisterActivity extends AppCompatActivity {
             mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //textViewMsg.setText(text2);
+
                     attemptRegister();
                 }
             });
 
 
         }
-
-
-        /**
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
-                //Manda e-mail
-                new SendEmail().sendEmail(RegisterActivity.this);
-
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        */
-
-
-
 
 
     }
@@ -158,13 +135,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void attemptRegister(){
 
-        String text2 = "Enviando dados do cliente para o cadastro!";
+        String text2 = "Cadastrando usuário!";
 
         TextView textViewMsg_Sending = (TextView) findViewById(R.id.textViewMsg_Sending);
 
         textViewMsg_Sending.setText(text2);
 
-        return;
     }
 
 
