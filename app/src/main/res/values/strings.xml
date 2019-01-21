@@ -37,6 +37,22 @@
     <string name="trans_transport">Transportar</string>
     <string name="trans_donate">Doar</string>
 
+    <string name="prop_mat">Material a reciclar</string>
+    <string name="prop_qtde">Quantidade</string>
+    <string name="prop_tprice">Valor Total</string>
+    <string name="prop_service">Custo do serviço</string>
+    <string name="prop_earning">Você receberá</string>
+
+    <string name="cb_org">Orgânico/Madeira</string>
+    <string name="cb_metal">Meta/Alumínio/Ferro</string>
+    <string name="cb_paper">Papel/Papelão</string>
+    <string name="cb_chem">Químico/Liquido/Pó</string>
+    <string name="cb_plastic">Plástico/Borracha</string>
+    <string name="cb_glass">Vidro</string>
+    <string name="cb_building">Entulho/Obra</string>
+    <string name="cb_cont">Contaminante</string>
+    <string name="cb_others">Outros</string>
+
     <string name="reg_button">Enviar</string>
 
     ,

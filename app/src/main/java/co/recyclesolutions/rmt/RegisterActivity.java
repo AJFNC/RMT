@@ -141,6 +141,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         textViewMsg_Sending.setText(text2);
 
+        //TODO: Mandar os dados inseridos nos campos para o MySQL
+
     }
 
 

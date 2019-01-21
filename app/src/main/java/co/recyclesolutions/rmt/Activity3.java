@@ -24,17 +24,6 @@ public class Activity3 extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //Manda e-mail
-                new SendEmail().sendEmail(Activity3.this);
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         // Pega a transação solicitada
 
@@ -48,19 +37,19 @@ public class Activity3 extends AppCompatActivity {
 
 
         if (action.equals("s")){
-            textView.setText(action);
+            textView.setText(R.string.trans_sell);
 
         }
         if (action.equals("b")){
-            textView.setText(action);
+            textView.setText(R.string.trans_buy);
 
         }
         if (action.equals("t")){
-            textView.setText(action);
+            textView.setText(R.string.trans_transport);
 
         }
         if (action.equals("d")){
-            textView.setText(action);
+            textView.setText(R.string.trans_donate);
 
         }
 
