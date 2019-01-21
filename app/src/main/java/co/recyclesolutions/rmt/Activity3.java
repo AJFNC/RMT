@@ -102,8 +102,12 @@ public class Activity3 extends AppCompatActivity {
 
         // Descomentar quando criar a Activity4
 
-        Intent signup_intent = new Intent(Activity3.this, LoginActivity.class);
-        startActivity(signup_intent);
+        String treg = "n";
+        Intent c4signup_intent = new Intent(Activity3.this, LoginActivity.class);
+        Bundle c4bundle = new Bundle();
+        c4bundle.putString("trans",treg);
+        c4signup_intent.putExtras(c4bundle);
+        startActivity(c4signup_intent);
 
     }
 
