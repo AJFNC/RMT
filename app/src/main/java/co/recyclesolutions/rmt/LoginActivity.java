@@ -344,7 +344,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
             String link = "http://192.168.1.176/loginuser.php";
-
+            String linkA = "http://192.168.1.176:8080/loginuser.php";
 
             try {
 
@@ -355,9 +355,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         URLEncoder.encode(mPassword, "UTF-8");
 
 
-                URL url = new URL(link);
+                URL url = new URL(linkA);
                 URLConnection conn = url.openConnection();
-
 
                 conn.setDoOutput(true);
 

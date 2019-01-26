@@ -11,7 +11,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 
 // Para uso futuro
 //import android.database.sqlite.SQLiteDatabase;
@@ -49,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
        // textViewPass.setText(rPass);
         //textViewMsg.setText(rBuffer);
 
-        String text1 = "O usuário não existe!";
+        //String text1 = "O usuário não existe!";
 
 
 
@@ -76,14 +85,14 @@ public class RegisterActivity extends AppCompatActivity {
 
         }
         else{
-            textViewMsg.setText(text1);
+            textViewMsg.setText(R.string.text1);
 
             // Clicando no botão para efetivar o cadastro no banco de dados
 
 
 
-            Button mEmailSignInButton = (Button) findViewById(R.id.buttonAttemptReg);
-            mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
+            Button sendingRegButton = (Button) findViewById(R.id.buttonAttemptReg);
+            sendingRegButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -133,15 +142,108 @@ public class RegisterActivity extends AppCompatActivity {
 
     //Implementação de métodos
 
-    private void attemptRegister(){
+    protected void attemptRegister(){
 
-        String text2 = "Cadastrando usuário!";
+        //String text2 = "Cadastrando usuário!";
+        String nameToReg;
+        String surNameToReg;
+        String whatsappToReg;
+        String emailToReg;
+        String passToReg;
+        String repPassToReg;
 
-        TextView textViewMsg_Sending = (TextView) findViewById(R.id.textViewMsg_Sending);
 
-        textViewMsg_Sending.setText(text2);
+        TextView textViewMsg_Sending = (TextView) findViewById(R.id.textViewMsg);
+        textViewMsg_Sending.setText(R.string.text2);
 
-        //TODO: Mandar os dados inseridos nos campos para o MySQL
+        EditText editTextNameR = (EditText) findViewById(R.id.editTextName);
+        nameToReg = editTextNameR.getText().toString();
+
+        EditText editTextSurNameR = (EditText) findViewById(R.id.editTextSurName);
+        surNameToReg = editTextSurNameR.getText().toString();
+
+        EditText editTextWhatsappR = (EditText) findViewById(R.id.editTextWhatsapp);
+        whatsappToReg = editTextWhatsappR.getText().toString();
+
+        EditText editTextEmailR = (EditText) findViewById(R.id.editTextEmail);
+        emailToReg = editTextEmailR.getText().toString();
+
+        EditText editTextPassR = (EditText) findViewById(R.id.editTextPass);
+        passToReg = editTextPassR.getText().toString();
+
+        EditText editTextRepPassR = (EditText) findViewById(R.id.editTextRepPass);
+        repPassToReg = editTextRepPassR.getText().toString();
+
+        if (repPassToReg.equals(passToReg)){
+
+            textViewMsg_Sending.setText(R.string.text_sending_data);
+
+            //TODO: Mandar os dados inseridos nos campos para o MySQL
+
+            String link = "http://192.168.1.176/loginuser.php";
+            String linkA = "http://192.168.1.176:8080/loginuser.php";
+
+            try {
+
+
+                String data = URLEncoder.encode("nome", "UTF-8") + "=" +
+                        URLEncoder.encode(nameToReg, "UTF-8");
+               // data += "&" + URLEncoder.encode("sobrenome", "UTF-8") + "=" +
+                        URLEncoder.encode(surNameToReg, "UTF-8");
+                data += "&" + URLEncoder.encode("whatsapp", "UTF-8") + "=" +
+                        URLEncoder.encode(whatsappToReg, "UTF-8");
+                //data += "&" + URLEncoder.encode("email", "UTF-8") + "=" +
+                        URLEncoder.encode(emailToReg, "UTF-8");
+               // data += "&" + URLEncoder.encode("senha", "UTF-8") + "=" +
+                        URLEncoder.encode(passToReg, "UTF-8");
+
+
+                URL url = new URL(linkA);
+                URLConnection conn = url.openConnection();
+
+                conn.setDoOutput(true);
+
+                OutputStreamWriter wrStrm = new OutputStreamWriter(conn.getOutputStream());
+
+
+                wrStrm.write(data);
+                wrStrm.flush();
+
+
+                BufferedReader rdStrm = new BufferedReader(new
+                        InputStreamReader(conn.getInputStream()));
+
+                StringBuilder sbuffer = new StringBuilder();
+                String line;
+
+
+                // Read Server Response
+                while ((line = rdStrm.readLine()) != null) {
+                    sbuffer.append(line);
+                    break;
+                }
+                textViewMsg_Sending.setText(sbuffer.toString());
+
+                //return true;
+
+
+            } catch (IOException e) {
+                //strBuffer = new String("Exception: " + e.getMessage());
+                //return false;
+                textViewMsg_Sending.setText(R.string.text_exception + e.getMessage());
+
+            }
+
+            // Como o usuário já está cadastrado voltamos para a tela de opções de transações (Activity2)
+
+            Intent back_to_options_intent = new Intent(this, Activity2.class);
+            startActivity(back_to_options_intent);
+
+        }
+        else {
+            textViewMsg_Sending.setText(R.string.text_mismatch_pass);
+
+        }
 
     }
 

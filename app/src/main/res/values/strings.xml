@@ -28,8 +28,10 @@
     <string name="text_phone">Whatsapp</string>
     <string name="text1">O usuário não existe!</string>
     <string name="text2">Cadastrando usuário!</string>
-
+    <string name="text_exception">Exception: </string>
+    <string name="text_mismatch_pass">Senhas diferentes, redigite!</string>
     <string name="text_error_connection">Problema de conexão!</string>
+    <string name="text_sending_data">Enviando dados...</string>
 
     <string name="trans_action">Transação</string>
     <string name="trans_sell">Vender</string>
