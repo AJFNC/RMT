@@ -128,12 +128,17 @@ public class Activity2 extends AppCompatActivity {
 
     // Chama Activity3
 
-    private void callAct3(){
-        Intent signup_intent = new Intent(Activity2.this, LoginActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("trans",transaction);
-        signup_intent.putExtras(bundle);
-        startActivity(signup_intent);
+    private void callRegisterAct(){
+
+        transaction = "r";      // transação = cadastrar
+        Intent reg_intent = new Intent(Activity2.this, RegisterActivity.class);
+        Bundle bundleRA = new Bundle();
+        bundleRA.putString("email", null);
+        bundleRA.putString("password", null);
+        bundleRA.putString("msg", "cadastrar");
+        bundleRA.putString("trans",transaction);
+        reg_intent.putExtras(bundleRA);
+        startActivity(reg_intent);
 
     }
 
@@ -162,7 +167,7 @@ public class Activity2 extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.SignUp_settings) {
-            callAct3();
+            callRegisterAct();
 
         }
 

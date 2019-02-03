@@ -35,8 +35,7 @@ public class Activity1 extends AppCompatActivity {
 
     private void goToAct2() {
         Intent intent;
-        intent = new Intent(Activity1.this,
-                Activity2.class);
+        intent = new Intent(Activity1.this,Activity2.class);
         startActivity(intent);
         finish();
     }

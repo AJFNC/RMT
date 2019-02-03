@@ -17,6 +17,9 @@ import android.widget.TextView;
 
 public class Activity3 extends AppCompatActivity {
 
+
+    String transaction;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,26 +32,26 @@ public class Activity3 extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        String action = bundle.getString("trans");
+        transaction = bundle.getString("trans");
 
         TextView textView = (TextView) findViewById(R.id.textView);
 
 
 
 
-        if (action.equals("s")){
+        if (transaction.equals("s")){
             textView.setText(R.string.trans_sell);
 
         }
-        if (action.equals("b")){
+        if (transaction.equals("b")){
             textView.setText(R.string.trans_buy);
 
         }
-        if (action.equals("t")){
+        if (transaction.equals("t")){
             textView.setText(R.string.trans_transport);
 
         }
-        if (action.equals("d")){
+        if (transaction.equals("d")){
             textView.setText(R.string.trans_donate);
 
         }
@@ -102,12 +105,15 @@ public class Activity3 extends AppCompatActivity {
 
         // Descomentar quando criar a Activity4
 
-        String treg = "n";
-        Intent c4signup_intent = new Intent(Activity3.this, LoginActivity.class);
-        Bundle c4bundle = new Bundle();
-        c4bundle.putString("trans",treg);
-        c4signup_intent.putExtras(c4bundle);
-        startActivity(c4signup_intent);
+        transaction = "r";      // transação = cadastrar
+        Intent reg_intent = new Intent(Activity3.this, RegisterActivity.class);
+        Bundle bundleRA = new Bundle();
+        bundleRA.putString("email", null);
+        bundleRA.putString("password", null);
+        bundleRA.putString("msg", "cadastrar");
+        bundleRA.putString("trans",transaction);
+        reg_intent.putExtras(bundleRA);
+        startActivity(reg_intent);
 
     }
 

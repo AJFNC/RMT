@@ -3,6 +3,7 @@ package co.recyclesolutions.rmt;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -66,6 +67,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     ///
 
+    //public URLConnection conn;
+
 
 
     /**
@@ -85,6 +88,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -237,7 +243,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Shows the progress UI and hides the login form.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
+    protected void showProgress(final boolean show) {             // private in the original code
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
@@ -333,6 +339,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mPassword;
         private String strBuffer;
 
+
+
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
@@ -345,6 +353,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             String link = "http://192.168.1.176/loginuser.php";
             String linkA = "http://192.168.1.176:8080/loginuser.php";
+            String linkB = "http://192.168.1.54/loginuser.php";
 
             try {
 
@@ -355,8 +364,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         URLEncoder.encode(mPassword, "UTF-8");
 
 
-                URL url = new URL(linkA);
+                URL url = new URL(linkB);
                 URLConnection conn = url.openConnection();
+                //conn = url.openConnection();
+
 
                 conn.setDoOutput(true);
 
@@ -385,7 +396,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
             } catch (IOException e) {
-                //strBuffer = new String("Exception: " + e.getMessage());
+                strBuffer = new String("Exception: " + e.getMessage());
                 return false;
             }
 
@@ -397,22 +408,45 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
 
+            //textViewMsg.setText(strBuffer);
+
             if (success) {
                 // TODO: register the new account here.
 
-                Intent reg_intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                Bundle bundleRA = new Bundle();
-                bundleRA.putString("email", mEmail);
-                bundleRA.putString("password", mPassword);
-                bundleRA.putString("msg", strBuffer);
-                bundleRA.putString("action", actionL);
-                reg_intent.putExtras(bundleRA);
-                startActivity(reg_intent);
+                // Se teve sucesso na autenticação, então passe o cliente para as transações
+
+
+                Intent log_intent = new Intent(LoginActivity.this, Activity3.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("trans","s");      // Após cadastrado com sucesso usuário vai para a transação de venda
+                log_intent.putExtras(bundle);
+                startActivity(log_intent);
+
 
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.text_error_connection));
-                mPasswordView.requestFocus();
+
+                if (strBuffer.contains("denied")){
+                     mPasswordView.setError(getString(R.string.text_error_connection));
+                     mPasswordView.requestFocus();
+
+                     // Pode mandar ele de volta para o Login
+
+                }
+                else {
+
+                    // Se não teve sucesso, então faça o registro do usuário
+
+                    Intent reg_intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                    Bundle bundleRA = new Bundle();
+                    bundleRA.putString("email", mEmail);
+                    bundleRA.putString("password", mPassword);
+                    bundleRA.putString("msg", strBuffer);
+                    bundleRA.putString("action", actionL);
+                    reg_intent.putExtras(bundleRA);
+                    startActivity(reg_intent);
+                }
+
 
             }
         }
