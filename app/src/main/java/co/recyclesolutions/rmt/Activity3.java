@@ -19,6 +19,7 @@ public class Activity3 extends AppCompatActivity {
 
 
     String transaction;
+    String strHostA3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class Activity3 extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         transaction = bundle.getString("trans");
+        strHostA3 = bundle.getString("host");
 
         TextView textView = (TextView) findViewById(R.id.textView);
 
@@ -112,6 +114,7 @@ public class Activity3 extends AppCompatActivity {
         bundleRA.putString("password", null);
         bundleRA.putString("msg", "cadastrar");
         bundleRA.putString("trans",transaction);
+        bundleRA.putString("host", strHostA3);
         reg_intent.putExtras(bundleRA);
         startActivity(reg_intent);
 

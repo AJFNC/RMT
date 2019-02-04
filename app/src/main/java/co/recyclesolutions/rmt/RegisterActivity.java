@@ -43,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     AttemptRegister rAttemptRegister = null;
     protected TextView textViewMsg;
+    String strHost;
 
     //public URLConnection connR;
 
@@ -70,6 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
         rAction = bundle.getString("trans");
         final String rPass = bundle.getString("password");
         String rBuffer = bundle.getString("msg");
+        strHost = bundle.get("host").toString();
 
         //TextView textViewEmail = (TextView) findViewById(R.id.textViewEmail);
         //TextView textViewPass = (TextView) findViewById(R.id.textViewPass);
@@ -296,7 +298,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                 //  String link = "http://192.168.1.176/loginuser.php";
                 String linkA = "http://192.168.1.176:8080/registeruser.php";
-                String linkB = "http://192.168.1.54/registeruser.php";
+                //String linkB = "http://192.168.1.54/registeruser.php";
+                String linkB = strHost;
+
 
                 try {
 

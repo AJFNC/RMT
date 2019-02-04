@@ -12,6 +12,8 @@ import android.os.Handler;
 
 public class Activity1 extends AppCompatActivity {
 
+    String server="http://192.168.1.54/registeruser.php";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,10 @@ public class Activity1 extends AppCompatActivity {
     private void goToAct2() {
         Intent intent;
         intent = new Intent(Activity1.this,Activity2.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("host", server);      // Após digitado o servidor vai para a RegisterActivity
+        intent.putExtras(bundle);
         startActivity(intent);
         finish();
     }

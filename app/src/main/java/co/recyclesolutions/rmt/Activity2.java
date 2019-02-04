@@ -21,6 +21,7 @@ public class Activity2 extends AppCompatActivity {
 
 
     private String transaction;
+    private String host="http://192.168.1.54/registeruser.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,20 @@ public class Activity2 extends AppCompatActivity {
         setContentView(R.layout.activity_2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        ///////// Se parar o problema estará aqui
+
+
+        //Recebe o www. ou o IP do Host com o aplicativo web e o banco de dados MySQL
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        host = bundle.getString("host");
+
+        //////////////////////////////////////////
+
+
+
 
         // Mostrar os 4 botoẽs de negociação
 
@@ -88,6 +103,7 @@ public class Activity2 extends AppCompatActivity {
         Intent log_intent = new Intent(Activity2.this, LoginActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("trans",transaction);
+        bundle.putString("host",host);
         log_intent.putExtras(bundle);
         startActivity(log_intent);
     }
@@ -99,6 +115,7 @@ public class Activity2 extends AppCompatActivity {
         Intent buy_intent = new Intent(Activity2.this, Activity3.class);
         Bundle bundle = new Bundle();
         bundle.putString("trans",transaction);
+        bundle.putString("host", host);
         buy_intent.putExtras(bundle);
         startActivity(buy_intent);
     }
@@ -110,6 +127,7 @@ public class Activity2 extends AppCompatActivity {
         Intent transport_intent = new Intent(Activity2.this, Activity3.class);
         Bundle bundle = new Bundle();
         bundle.putString("trans",transaction);
+        bundle.putString("host", host);
         transport_intent.putExtras(bundle);
         startActivity(transport_intent);
     }
@@ -121,6 +139,7 @@ public class Activity2 extends AppCompatActivity {
         Intent donate_intent = new Intent(Activity2.this, Activity3.class);
         Bundle bundle = new Bundle();
         bundle.putString("trans",transaction);
+        bundle.putString("host", host);
         donate_intent.putExtras(bundle);
         startActivity(donate_intent);
 
@@ -137,10 +156,25 @@ public class Activity2 extends AppCompatActivity {
         bundleRA.putString("password", null);
         bundleRA.putString("msg", "cadastrar");
         bundleRA.putString("trans",transaction);
+        bundleRA.putString("host", host);
         reg_intent.putExtras(bundleRA);
         startActivity(reg_intent);
 
     }
+
+    // Chama Activity de Configuração
+
+
+    private void callConfigAct(){
+
+        //Vai pegar o host
+        transaction = "c";      // transação = configurar
+        Intent reg_intent = new Intent(Activity2.this, ConfigActivity.class);
+        startActivity(reg_intent);
+
+
+    }
+
 
 
     ////////////////// Fim dos métodos iplementados
@@ -171,6 +205,11 @@ public class Activity2 extends AppCompatActivity {
 
         }
 
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.Setup_settings) {
+            callConfigAct();
+
+        }
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {

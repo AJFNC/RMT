@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     String email;
     String password;
     String actionL;
+    String strHostL;
 
 
     ///
@@ -92,6 +93,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,6 +117,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         actionL = bundle.getString("trans");
+        strHostL = bundle.getString("host");
 
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
@@ -353,7 +356,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             String link = "http://192.168.1.176/loginuser.php";
             String linkA = "http://192.168.1.176:8080/loginuser.php";
-            String linkB = "http://192.168.1.54/loginuser.php";
+            //String linkB = "http://192.168.1.54/loginuser.php";
+            String linkB = strHostL;
 
             try {
 
@@ -419,6 +423,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Intent log_intent = new Intent(LoginActivity.this, Activity3.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("trans","s");      // Após cadastrado com sucesso usuário vai para a transação de venda
+                bundle.putString("host",strHostL);
                 log_intent.putExtras(bundle);
                 startActivity(log_intent);
 
@@ -443,6 +448,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     bundleRA.putString("password", mPassword);
                     bundleRA.putString("msg", strBuffer);
                     bundleRA.putString("action", actionL);
+                    bundleRA.putString("host",strHostL);
                     reg_intent.putExtras(bundleRA);
                     startActivity(reg_intent);
                 }
