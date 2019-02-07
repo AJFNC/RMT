@@ -20,6 +20,7 @@ public class Activity3 extends AppCompatActivity {
 
     String transaction;
     String strHostA3;
+    String msgA3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +34,16 @@ public class Activity3 extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        transaction = bundle.getString("trans");
-        strHostA3 = bundle.getString("host");
+        if(bundle != null) {
+            transaction = bundle.getString("trans");
+            strHostA3 = bundle.getString("host");
+            msgA3 = bundle.getString("msg");
+        }
 
         TextView textView = (TextView) findViewById(R.id.textView);
+        TextView textViewMsgA3 = findViewById(R.id.textViewMsgA3);
 
-
+        textViewMsgA3.setText(msgA3);
 
 
         if (transaction.equals("s")){
@@ -82,7 +87,7 @@ public class Activity3 extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.SignUp_settings) {
-            callAct4();
+            callRegAct();
 
         }
 
@@ -103,16 +108,17 @@ public class Activity3 extends AppCompatActivity {
 
     // Chama Activity3
 
-    private void callAct4(){
+    private void callRegAct(){
 
         // Descomentar quando criar a Activity4
 
         transaction = "r";      // transação = cadastrar
         Intent reg_intent = new Intent(Activity3.this, RegisterActivity.class);
         Bundle bundleRA = new Bundle();
-        bundleRA.putString("email", null);
-        bundleRA.putString("password", null);
-        bundleRA.putString("msg", "cadastrar");
+        //bundleRA.putString("email", "");
+        //bundleRA.putString("password", "");
+        //bundleRA.putString("msg", "cadastrar");
+        bundleRA.putString("msg", msgA3);
         bundleRA.putString("trans",transaction);
         bundleRA.putString("host", strHostA3);
         reg_intent.putExtras(bundleRA);

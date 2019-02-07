@@ -44,13 +44,19 @@ public class RegisterActivity extends AppCompatActivity {
     AttemptRegister rAttemptRegister = null;
     protected TextView textViewMsg;
     String strHost;
+    String rPass;
+    String rBuffer;
+    String rEmail;
 
-    //public URLConnection connR;
 
     EditText editTextNameR;
-    EditText editTextWhatsappR;
+    //EditText editTextWhatsappR;
 
     String rAction;
+
+    String nameToReg;
+    String passToReg;
+    //final String repPassToReg;
 
 
     @Override
@@ -67,11 +73,15 @@ public class RegisterActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        final String rEmail = bundle.getString("email");
-        rAction = bundle.getString("trans");
-        final String rPass = bundle.getString("password");
-        String rBuffer = bundle.getString("msg");
-        strHost = bundle.get("host").toString();
+        if(bundle != null) {
+            rEmail = bundle.getString("email");
+            rAction = bundle.getString("trans");
+            rPass = bundle.getString("password");
+            rBuffer = bundle.getString("msg");
+            strHost = bundle.getString("host");
+        }
+
+        textViewMsg.setText(rBuffer);
 
         //TextView textViewEmail = (TextView) findViewById(R.id.textViewEmail);
         //TextView textViewPass = (TextView) findViewById(R.id.textViewPass);
@@ -89,6 +99,11 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
+        editTextNameR = (EditText) findViewById(R.id.editTextName);
+        nameToReg = editTextNameR.getText().toString();
+
+        EditText editTextPassR = (EditText) findViewById(R.id.editTextPass);
+        passToReg = editTextPassR.getText().toString();
 
 
 
@@ -96,11 +111,11 @@ public class RegisterActivity extends AppCompatActivity {
         // Usar a mensagem de retorno do servidor para criar novo usuário ou liberar acesso
 
 
-        if (rBuffer.equals(rEmail)) {
+        if (rBuffer != "cadastrar") {
 
 
 
-            textViewMsg.setText(rBuffer);
+           // textViewMsg.setText(rBuffer);
 
 
 
@@ -109,6 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
             Intent sell_intent = new Intent(this, Activity3.class);
             Bundle bundleS = new Bundle();
             bundleS.putString("trans","s");
+            bundleS.putString("msg", rBuffer);
             sell_intent.putExtras(bundleS);
             startActivity(sell_intent);
 
@@ -118,50 +134,11 @@ public class RegisterActivity extends AppCompatActivity {
         else{
             textViewMsg.setText(R.string.text1);
 
-            // Clicando no botão para efetivar o cadastro no banco de dados
-
-
-            //TextView textViewMsg_Sending = (TextView) findViewById(R.id.textViewMsg);
-            textViewMsg.setText(R.string.text2);
-
-            // Take the user data
-
-            final String nameToReg;
-            //final String surNameToReg;
-            final String whatsappToReg;
-           // final String emailToReg;
-            //final String passToReg;
-            //final String repPassToReg;
-
-
-
-
-            editTextNameR = (EditText) findViewById(R.id.editTextName);
-            nameToReg = editTextNameR.getText().toString();
-
-           //EditText editTextSurNameR = (EditText) findViewById(R.id.editTextSurName);
-            // surNameToReg = editTextSurNameR.getText().toString();
-
-            editTextWhatsappR = (EditText) findViewById(R.id.editTextWhatsapp);
-            whatsappToReg = editTextWhatsappR.getText().toString();
-
-            //EditText editTextEmailR = (EditText) findViewById(R.id.editTextEmail);
-            //emailToReg = editTextEmailR.getText().toString();
-
-            //EditText editTextPassR = (EditText) findViewById(R.id.editTextPass);
-            //passToReg = editTextPassR.getText().toString();
-
-            //EditText editTextRepPassR = (EditText) findViewById(R.id.editTextRepPass);
-            //repPassToReg = editTextRepPassR.getText().toString();
-
-
 
             Button sendingRegButton = (Button) findViewById(R.id.buttonAttemptReg);
             sendingRegButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-
 
 
                     /**
@@ -171,30 +148,12 @@ public class RegisterActivity extends AppCompatActivity {
 
                      */
 
-                    //if (repPassToReg.equals(passToReg)) {
-                    //if (rPass != null) {
-
-                       // textViewMsg.setText(R.string.text_match_pass);
-
-                        // Let's do this:
-                        //Vamos deixar inoperate apar ver onde está o problema
-
-
-
-                        rAttemptRegister = new AttemptRegister(nameToReg, whatsappToReg);
-                        //rAttemptRegister = new AttemptRegister(rEmail, null, "87999999999", null, rPass);
+                        rAttemptRegister = new AttemptRegister(nameToReg, passToReg);
                         rAttemptRegister.execute((Void) null);
 
-
-                   // }
-                   // else {
-
-                     //   textViewMsg.setText(R.string.text_mismatch_pass);
-
-                    //}
+                        //sleepTs(3000);
 
 
-                   // attemptRegister();
                 }
             });
 
@@ -203,6 +162,16 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
+
+    private void sleepTs(int milis){
+
+        try{Thread.sleep(milis);}
+        catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+
 
     // Cria o menu de opções na barra de ferramentas do aplicativo
 
@@ -246,22 +215,22 @@ public class RegisterActivity extends AppCompatActivity {
 
         private final String rName;
         //private final String rSurName;
-        private final String rWhatsapp;
+        //private final String rWhatsapp;
         //private final String rEmail;
-        //private final String rPass;
+        private final String rPass;
         //private final String rRePass;
 
 
 
         String strBuffer;
 
-        AttemptRegister(String name, String whtsap){
+        AttemptRegister(String name, String pass){
         //AttemptRegister(String name, String surname, String whtsap, String email, String pass){
             rName = name;
             //rSurName = surname;
-            rWhatsapp = whtsap;
+           // rWhatsapp = whtsap;
             //rEmail = email;
-            //rPass = pass;
+            rPass = pass;
             //rRePass = rpass;
 
         }
@@ -299,23 +268,22 @@ public class RegisterActivity extends AppCompatActivity {
                 //  String link = "http://192.168.1.176/loginuser.php";
                 String linkA = "http://192.168.1.176:8080/registeruser.php";
                 //String linkB = "http://192.168.1.54/registeruser.php";
-                String linkB = strHost;
+                String linkB = strHost + "registeruser.php";
 
 
                 try {
 
 
-
-                    String data = URLEncoder.encode("nome", "UTF-8") + "=" +
+                    String data = URLEncoder.encode("username", "UTF-8") + "=" +
                             URLEncoder.encode(rName, "UTF-8");
                     // data += "&" + URLEncoder.encode("sobrenome", "UTF-8") + "=" +
                     //URLEncoder.encode(rSurName, "UTF-8");
-                    data += "&" + URLEncoder.encode("whatsapp", "UTF-8") + "=" +
-                            URLEncoder.encode(rWhatsapp, "UTF-8");
+                    //data += "&" + URLEncoder.encode("whatsapp", "UTF-8") + "=" +
+                    //        URLEncoder.encode(rWhatsapp, "UTF-8");
                     //data += "&" + URLEncoder.encode("email", "UTF-8") + "=" +
                     //URLEncoder.encode(rEmail, "UTF-8");
-                    //data += "&" + URLEncoder.encode("senha", "UTF-8") + "=" +
-                    //URLEncoder.encode(rPass, "UTF-8");
+                    data += "&" + URLEncoder.encode("password", "UTF-8") + "=" +
+                    URLEncoder.encode(rPass, "UTF-8");
 
 
                     URL url = new URL(linkB);
@@ -343,7 +311,7 @@ public class RegisterActivity extends AppCompatActivity {
                         sbuffer.append(line);
                         break;
                     }
-                    //textViewMsg.setText(sbuffer.toString());
+
 
                     strBuffer = sbuffer.toString();
 
@@ -356,21 +324,10 @@ public class RegisterActivity extends AppCompatActivity {
                     strBuffer = "Exception: " + e.getMessage();
 
                     return false;
-                    //textViewMsg.setText(R.string.text_exception + e.getMessage());
+
 
                 }
-
-                // Como o usuário já está cadastrado voltamos para a tela de opções de transações (Activity2)
-
-                //Intent back_to_options_intent = new Intent(this, Activity2.class);
-                //startActivity(back_to_options_intent);
-
-
-            //}
-            //else {
-            //    textViewMsg_Sending.setText(R.string.text_mismatch_pass);
-
-            //}
+                
 
         }
 

@@ -12,7 +12,7 @@ import android.os.Handler;
 
 public class Activity1 extends AppCompatActivity {
 
-    String server="http://192.168.1.54/registeruser.php";
+    String server="http://192.168.1.54/";
 
 
     @Override
