@@ -34,6 +34,7 @@
     <string name="text_mismatch_pass">Senhas diferentes, redigite!</string>
     <string name="text_error_connection">Problema de conexão!</string>
     <string name="text_sending_data">Enviando dados...</string>
+    <string name="text_version">Versão</string>
 
     <string name="trans_action">Transação</string>
     <string name="trans_sell">Vender</string>

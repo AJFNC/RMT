@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.os.Handler;
+import android.widget.TextView;
 
 
 // This Activity is to splash the Recycle Solutions screen
@@ -27,6 +28,9 @@ public class Activity1 extends AppCompatActivity {
                 goToAct2();
             }
         }, 2000);
+
+        TextView textViewVersion = findViewById(R.id.textViewVersion);
+        textViewVersion.setText("Versão: " + "4");
 
 
 

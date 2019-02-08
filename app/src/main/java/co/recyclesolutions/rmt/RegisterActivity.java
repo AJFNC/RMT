@@ -83,17 +83,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         textViewMsg.setText(rBuffer);
 
-        //TextView textViewEmail = (TextView) findViewById(R.id.textViewEmail);
-        //TextView textViewPass = (TextView) findViewById(R.id.textViewPass);
-
-
-        // final TextView textViewMsg = (TextView) findViewById(R.id.textViewMsg);
-
-        //final TextView textViewMsg = (TextView) findViewById(R.id.textViewMsg);
-
-        //textViewEmail.setText(rEmail);
-       // textViewPass.setText(rPass);
-        //textViewMsg.setText(rBuffer);
 
         //String text1 = "O usuário não existe!";
 
@@ -105,60 +94,62 @@ public class RegisterActivity extends AppCompatActivity {
         EditText editTextPassR = (EditText) findViewById(R.id.editTextPass);
         passToReg = editTextPassR.getText().toString();
 
-
+        Button sendingRegButton = (Button) findViewById(R.id.buttonAttemptReg);
 
 
         // Usar a mensagem de retorno do servidor para criar novo usuário ou liberar acesso
 
+        System.out.println("[RA]1 " + rAction);
 
-        if (rBuffer != "cadastrar") {
+        /**
+
+        if (rAction != "r") {
 
 
 
            // textViewMsg.setText(rBuffer);
 
-
+            System.out.println("[RA]2 " + "Usuario já cadastrado pode vender");
 
             // Como o usuário está cadastrado vá para Activity escolhida
 
             Intent sell_intent = new Intent(this, Activity3.class);
             Bundle bundleS = new Bundle();
-            bundleS.putString("trans","s");
+            bundleS.putString("trans",rAction);
             bundleS.putString("msg", rBuffer);
             sell_intent.putExtras(bundleS);
             startActivity(sell_intent);
 
-
+            finish();
 
         }
         else{
+
+
+         */
             textViewMsg.setText(R.string.text1);
 
+            System.out.println("[RA]3 Usuário não existe!");
 
-            Button sendingRegButton = (Button) findViewById(R.id.buttonAttemptReg);
+
             sendingRegButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
 
-                    /**
-                     showProgress(true);
-                     mAuthTask = new UserLoginTask(email, password);
-                     mAuthTask.execute((Void) null)
-
-                     */
 
                         rAttemptRegister = new AttemptRegister(nameToReg, passToReg);
                         rAttemptRegister.execute((Void) null);
 
                         //sleepTs(3000);
 
+                        finish();
 
                 }
             });
 
 
-        }
+        //} // é do else
 
 
     }
@@ -222,7 +213,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-        String strBuffer;
+        String strBufferRA;
 
         AttemptRegister(String name, String pass){
         //AttemptRegister(String name, String surname, String whtsap, String email, String pass){
@@ -276,19 +267,22 @@ public class RegisterActivity extends AppCompatActivity {
 
                     String data = URLEncoder.encode("username", "UTF-8") + "=" +
                             URLEncoder.encode(rName, "UTF-8");
+                    data += "&" + URLEncoder.encode("password", "UTF-8") + "=" +
+                            URLEncoder.encode(rPass, "UTF-8");
+
                     // data += "&" + URLEncoder.encode("sobrenome", "UTF-8") + "=" +
                     //URLEncoder.encode(rSurName, "UTF-8");
                     //data += "&" + URLEncoder.encode("whatsapp", "UTF-8") + "=" +
                     //        URLEncoder.encode(rWhatsapp, "UTF-8");
                     //data += "&" + URLEncoder.encode("email", "UTF-8") + "=" +
                     //URLEncoder.encode(rEmail, "UTF-8");
-                    data += "&" + URLEncoder.encode("password", "UTF-8") + "=" +
-                    URLEncoder.encode(rPass, "UTF-8");
 
+
+
+                    //Essa conexão vai fazer um INSERT na página registeruser.php
 
                     URL url = new URL(linkB);
                     URLConnection connR = url.openConnection();
-                    //connR = url.openConnection();
 
                     connR.setDoOutput(true);
 
@@ -313,7 +307,10 @@ public class RegisterActivity extends AppCompatActivity {
                     }
 
 
-                    strBuffer = sbuffer.toString();
+
+                    strBufferRA = sbuffer.toString();
+
+                    System.out.println("[RA]4 " + strBufferRA + "  Resultado do INSERT");
 
                     return true;
 
@@ -321,7 +318,9 @@ public class RegisterActivity extends AppCompatActivity {
                 } catch (IOException e) {
 
                     //Deixar comentado para verificar onde esta o problema
-                    strBuffer = "Exception: " + e.getMessage();
+                    strBufferRA = "Exception: " + e.getMessage();
+
+                    //System.out.println("[RA]5 " + "Problema no cadastro remoto" + e.getMessage());
 
                     return false;
 
@@ -336,12 +335,12 @@ public class RegisterActivity extends AppCompatActivity {
 
             rAttemptRegister = null;
 
-            textViewMsg.setText(strBuffer);
+            textViewMsg.setText(strBufferRA);
 
             if (success) {
                 // TODO: register the new account here.
 
-
+                System.out.println("[RA]6 " + "Sucesso ao cadastrar o usuario para vender");
 
                 if (rAction == "s") {
                     // Como o usuário já está cadastrado vai para a transação de venda (Activity3)
@@ -349,13 +348,22 @@ public class RegisterActivity extends AppCompatActivity {
                     Intent log_intent = new Intent(RegisterActivity.this, Activity3.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("trans", "s");      // Após cadastrado com sucesso usuário vai para a transação de venda
+                    bundle.putString("trans", rName);
+                    bundle.putString("host", strHost);
                     log_intent.putExtras(bundle);
                     startActivity(log_intent);
 
+                    finish();
+
                 }
                 else{
+
+                    System.out.println("[RA]7 " + "Sucesso ao cadastrar o usuario para qualquer operação");
+
                     Intent intent = new Intent(RegisterActivity.this,Activity2.class);
                     startActivity(intent);
+
+                    finish();
 
                 }
 
@@ -363,7 +371,11 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
             else{
-                textViewMsg.setText(strBuffer);
+                textViewMsg.setText(strBufferRA);
+
+                System.out.println("[RA]8 " + "Por algum motivo não cadastrou!");
+
+                finish();
 
             }
 

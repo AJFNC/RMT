@@ -157,9 +157,9 @@ public class Activity2 extends AppCompatActivity {
         transaction = "r";      // transação = cadastrar
         Intent reg_intent = new Intent(Activity2.this, RegisterActivity.class);
         Bundle bundleRA = new Bundle();
-        bundleRA.putString("email", null);
-        bundleRA.putString("password", null);
-        bundleRA.putString("msg", "cadastrar");
+        //bundleRA.putString("email", null);
+       // bundleRA.putString("password", null);
+       // bundleRA.putString("msg", "");
         bundleRA.putString("trans",transaction);
         bundleRA.putString("host", host);
         reg_intent.putExtras(bundleRA);

@@ -118,7 +118,7 @@ public class Activity3 extends AppCompatActivity {
         //bundleRA.putString("email", "");
         //bundleRA.putString("password", "");
         //bundleRA.putString("msg", "cadastrar");
-        bundleRA.putString("msg", msgA3);
+        //bundleRA.putString("msg", "");
         bundleRA.putString("trans",transaction);
         bundleRA.putString("host", strHostA3);
         reg_intent.putExtras(bundleRA);

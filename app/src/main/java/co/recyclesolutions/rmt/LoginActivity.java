@@ -234,7 +234,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             //Inserir um delay e um saída padrão
 
-            //System.out.println(mAuthTask.getStrBuffer());
+            //System.out.println("[LA]" + mAuthTask.getStrBuffer() + " é o resultado final do acesso ao bd");
 
            // textViewLMsg.setText(mAuthTask.getStrBuffer());
 
@@ -367,7 +367,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mPassword = password;
         }
 
-        public String getStrBuffer(){
+        public String getStrBuffer(){                   //Método que vai permitir verificar o conteúdo do Buffer de retorno do servidor
             return this.strBuffer;
         }
 
@@ -381,8 +381,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             //String linkB = "http://192.168.1.54/loginuser.php";
             String linkB = strHostL + "loginuser.php";
 
-            //String userM = "ajfnc";
-            //String passM = "R&cycl02019";
 
 
             try {
@@ -396,8 +394,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 URL url = new URL(linkB);
                 URLConnection conn = url.openConnection();
-                //conn = url.openConnection();
-
 
                 conn.setDoOutput(true);
 
@@ -427,7 +423,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 if (strBuffer.equals(email)){   //Não pode ser o userM
 
-                    System.out.println(strBuffer);  //Se obteve sucesso em recuperar o nome igual ao digitado, faça o post execution
+                    System.out.println("[LA]1 " + strBuffer + " é o nome do usuario");  //Se obteve sucesso em recuperar o nome igual ao digitado, faça o post execution
                     return true;
                 }
 
@@ -439,7 +435,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 //Esse catch poderia retornar a string com a mensagem do servidor
 
-                System.out.println(strBuffer);
+                System.out.println("[LA]2 " + strBuffer);
 
                 return false;
             }
@@ -459,15 +455,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 // Se obteve sucesso na autenticação, então passe o cliente para as transações
 
+                System.out.println("[LA]3 " + strBuffer + " Se o usario já existe, vá para as transações");
 
                 Intent log_intent = new Intent(LoginActivity.this, Activity3.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("trans","s");      // Após cadastrado com sucesso usuário vai para a transação de venda
+                bundle.putString("trans",actionL);      // Após cadastrado com sucesso usuário vai para a transação de venda
                 bundle.putString("host",strHostL);
                 log_intent.putExtras(bundle);
                 startActivity(log_intent);
 
-                System.out.println("Se o usario existe, vá para as transações");
+
 
                 finish();
             } else {
@@ -476,7 +473,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                      mPasswordView.setError(getString(R.string.text_error_connection));
                      mPasswordView.requestFocus();
 
-                     System.out.println("Acesso negato, volta para o login");
+                     System.out.println("[LA]4 " + "Acesso negato, volta para o login");
 
                      // Pode mandar ele de volta para o Login
 
@@ -485,17 +482,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                     // Se não teve sucesso, então faça o registro do usuário
 
+                    System.out.println("[LA]5 " + "Não teve sucesso, fazer cadastro");
+
                     Intent reg_intent = new Intent(LoginActivity.this, RegisterActivity.class);
                     Bundle bundleRA = new Bundle();
                     bundleRA.putString("email", mEmail);
                     bundleRA.putString("password", mPassword);
                     bundleRA.putString("msg", strBuffer);
-                    bundleRA.putString("trans", actionL);
+                    bundleRA.putString("trans", "r");           // Tem que ser transação de cadastro
                     bundleRA.putString("host",strHostL);
                     reg_intent.putExtras(bundleRA);
                     startActivity(reg_intent);
 
-                    System.out.println("Não teve sucess, fazer cadastro");
+
 
                     finish();
                 }
