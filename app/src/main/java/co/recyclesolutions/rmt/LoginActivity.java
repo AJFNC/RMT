@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -42,6 +43,7 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.lang.Thread;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -89,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-
+    private TextView textViewLMsg;
 
 
 
@@ -101,6 +103,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
+
+        textViewLMsg = findViewById(R.id.textView9);
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -116,9 +120,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        actionL = bundle.getString("trans");
-        strHostL = bundle.getString("host");
 
+        if(bundle != null) {
+            actionL = bundle.getString("trans");
+            strHostL = bundle.getString("host");
+        }
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -225,8 +231,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
+
+            //Inserir um delay e um saída padrão
+
+            //System.out.println(mAuthTask.getStrBuffer());
+
+           // textViewLMsg.setText(mAuthTask.getStrBuffer());
+
+
+
         }
     }
+
+
+
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
@@ -349,6 +367,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mPassword = password;
         }
 
+        public String getStrBuffer(){
+            return this.strBuffer;
+        }
+
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
@@ -357,7 +379,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             String link = "http://192.168.1.176/loginuser.php";
             String linkA = "http://192.168.1.176:8080/loginuser.php";
             //String linkB = "http://192.168.1.54/loginuser.php";
-            String linkB = strHostL;
+            String linkB = strHostL + "loginuser.php";
+
+            //String userM = "ajfnc";
+            //String passM = "R&cycl02019";
+
 
             try {
 
@@ -392,15 +418,29 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 // Read Server Response
                 while ((line = rdStrm.readLine()) != null) {
                     sbuffer.append(line);
+                    //System.out.println(sbuffer);
                     break;
                 }
-                strBuffer = sbuffer.toString();
+                strBuffer = sbuffer.toString(); //A página loginuser.php retorna o nome do cliente depois de fazer um SELECT na tabela clienes
 
-                return true;
+
+
+                if (strBuffer.equals(email)){   //Não pode ser o userM
+
+                    System.out.println(strBuffer);  //Se obteve sucesso em recuperar o nome igual ao digitado, faça o post execution
+                    return true;
+                }
+
+                return false;
 
 
             } catch (IOException e) {
                 strBuffer = new String("Exception: " + e.getMessage());
+
+                //Esse catch poderia retornar a string com a mensagem do servidor
+
+                System.out.println(strBuffer);
+
                 return false;
             }
 
@@ -412,12 +452,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
 
-            //textViewMsg.setText(strBuffer);
+
 
             if (success) {
                 // TODO: register the new account here.
 
-                // Se teve sucesso na autenticação, então passe o cliente para as transações
+                // Se obteve sucesso na autenticação, então passe o cliente para as transações
 
 
                 Intent log_intent = new Intent(LoginActivity.this, Activity3.class);
@@ -427,6 +467,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 log_intent.putExtras(bundle);
                 startActivity(log_intent);
 
+                System.out.println("Se o usario existe, vá para as transações");
 
                 finish();
             } else {
@@ -434,6 +475,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 if (strBuffer.contains("denied")){
                      mPasswordView.setError(getString(R.string.text_error_connection));
                      mPasswordView.requestFocus();
+
+                     System.out.println("Acesso negato, volta para o login");
 
                      // Pode mandar ele de volta para o Login
 
@@ -447,10 +490,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     bundleRA.putString("email", mEmail);
                     bundleRA.putString("password", mPassword);
                     bundleRA.putString("msg", strBuffer);
-                    bundleRA.putString("action", actionL);
+                    bundleRA.putString("trans", actionL);
                     bundleRA.putString("host",strHostL);
                     reg_intent.putExtras(bundleRA);
                     startActivity(reg_intent);
+
+                    System.out.println("Não teve sucess, fazer cadastro");
+
+                    finish();
                 }
 
 

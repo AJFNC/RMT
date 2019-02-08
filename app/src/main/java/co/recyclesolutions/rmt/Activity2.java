@@ -21,7 +21,7 @@ public class Activity2 extends AppCompatActivity {
 
 
     private String transaction;
-    private String host="http://192.168.1.54/registeruser.php";
+    private String host="http://192.168.1.54/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,12 @@ public class Activity2 extends AppCompatActivity {
         //Recebe o www. ou o IP do Host com o aplicativo web e o banco de dados MySQL
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        host = bundle.getString("host");
+
+        if(bundle != null){
+
+            host = bundle.getString("host");
+        }
+
 
         //////////////////////////////////////////
 
