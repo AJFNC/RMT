@@ -48,6 +48,8 @@ public class RegisterActivity extends AppCompatActivity {
     String rBuffer;
     String rEmail;
 
+    String rName;
+
 
     EditText editTextNameR;
     //EditText editTextWhatsappR;
@@ -88,11 +90,11 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-        editTextNameR = (EditText) findViewById(R.id.editTextName);
-        nameToReg = editTextNameR.getText().toString();
+        final EditText editTextNameR = (EditText) findViewById(R.id.editTextName);
 
-        EditText editTextPassR = (EditText) findViewById(R.id.editTextPass);
-        passToReg = editTextPassR.getText().toString();
+
+        final EditText editTextPassR = (EditText) findViewById(R.id.editTextPass);
+
 
         Button sendingRegButton = (Button) findViewById(R.id.buttonAttemptReg);
 
@@ -100,6 +102,8 @@ public class RegisterActivity extends AppCompatActivity {
         // Usar a mensagem de retorno do servidor para criar novo usuário ou liberar acesso
 
         System.out.println("[RA]1 " + rAction);
+
+
 
         /**
 
@@ -136,14 +140,17 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
+                    nameToReg = editTextNameR.getText().toString();
+                    passToReg = editTextPassR.getText().toString();
 
+                    System.out.println("[RA]2.1 " + nameToReg + " , " + passToReg);
 
-                        rAttemptRegister = new AttemptRegister(nameToReg, passToReg);
-                        rAttemptRegister.execute((Void) null);
+                    rAttemptRegister = new AttemptRegister(nameToReg, passToReg);
+                    rAttemptRegister.execute((Void) null);
 
                         //sleepTs(3000);
 
-                        finish();
+                    finish();
 
                 }
             });
@@ -201,16 +208,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     class AttemptRegister extends AsyncTask<Void, Void, Boolean> {
 
-        //String text2 = "Cadastrando usuário!";
-
-
-        private final String rName;
-        //private final String rSurName;
-        //private final String rWhatsapp;
-        //private final String rEmail;
-        private final String rPass;
-        //private final String rRePass;
-
 
 
         String strBufferRA;
@@ -228,18 +225,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-        /**
-
-
-         String nameToReg;
-         String surNameToReg;
-         String whatsappToReg;
-         String emailToReg;
-         String passToReg;
-         String repPassToReg;
-
-
-        */
 
         @Override
         protected Boolean doInBackground(Void... params) {
@@ -259,13 +244,16 @@ public class RegisterActivity extends AppCompatActivity {
                 //  String link = "http://192.168.1.176/loginuser.php";
                 String linkA = "http://192.168.1.176:8080/registeruser.php";
                 //String linkB = "http://192.168.1.54/registeruser.php";
-                String linkB = strHost + "registeruser.php";
+                String linkB = strHost + "registeruser1.php";
 
 
                 try {
 
 
-                    String data = URLEncoder.encode("username", "UTF-8") + "=" +
+
+                    System.out.println("[RA]2.2 " + rName + " , " + rPass);
+
+                            String data = URLEncoder.encode("username", "UTF-8") + "=" +
                             URLEncoder.encode(rName, "UTF-8");
                     data += "&" + URLEncoder.encode("password", "UTF-8") + "=" +
                             URLEncoder.encode(rPass, "UTF-8");
@@ -320,7 +308,7 @@ public class RegisterActivity extends AppCompatActivity {
                     //Deixar comentado para verificar onde esta o problema
                     strBufferRA = "Exception: " + e.getMessage();
 
-                    //System.out.println("[RA]5 " + "Problema no cadastro remoto" + e.getMessage());
+                    System.out.println("[RA]5 " + "Problema no cadastro remoto " + e.getMessage());
 
                     return false;
 
