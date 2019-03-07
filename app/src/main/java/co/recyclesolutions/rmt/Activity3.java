@@ -9,6 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -21,6 +24,18 @@ public class Activity3 extends AppCompatActivity {
     String transaction;
     String strHostA3;
     String msgA3;
+
+    String strQty;
+    float dQty;
+
+    String strPrice;
+    float dPrice;
+
+    String strCost;
+    float dCost;
+
+    String strYouEarn;
+    float dYouEarn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +55,174 @@ public class Activity3 extends AppCompatActivity {
             msgA3 = bundle.getString("msg");
         }
 
-        TextView textView = (TextView) findViewById(R.id.textView);
+        TextView textView = findViewById(R.id.textView);
         TextView textViewMsgA3 = findViewById(R.id.textViewMsgA3);
 
-        textViewMsgA3.setText(msgA3);
+
+        // Inicializando as views e edits de texto, botão de enviar proposta e os checkboxes
+
+
+        final EditText editText1 = findViewById(R.id.editText1);
+        final EditText editText2 = findViewById(R.id.editText2);
+        final EditText editText3 = findViewById(R.id.editText3);
+        final EditText editText4 = findViewById(R.id.editText4);
+        final EditText editText6 = findViewById(R.id.editText6);
+
+        final EditText editText9 = findViewById(R.id.editText9);
+        EditText editText10 = findViewById(R.id.editText10);
+        EditText editText11 = findViewById(R.id.editText11);
+
+        CheckBox checkBox1 = findViewById(R.id.checkBox1);
+        CheckBox checkBox2 = findViewById(R.id.checkBox2);
+        CheckBox checkBox3 = findViewById(R.id.checkBox3);
+        CheckBox checkBox4 = findViewById(R.id.checkBox4);
+        CheckBox checkBox6 = findViewById(R.id.checkBox6);
+
+
+
+        // Torna os edits de texto não editáveis
+
+
+        editText1.setEnabled(false);
+        editText2.setEnabled(false);
+        editText3.setEnabled(false);
+        editText4.setEnabled(false);
+        editText6.setEnabled(false);
+        editText9.setEnabled(false);
+        editText10.setEnabled(false);
+        editText11.setEnabled(false);
+
+
+
+        // ativa Listners para verificar os checkbox marcados e ativa os edits correspondentes
+
+
+        checkBox1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    editText1.setEnabled(b);
+                    editText9.setEnabled(b);
+
+
+                    try {
+                        strQty = editText1.getText().toString();
+                        dQty = Float.parseFloat(strQty);
+
+                        strPrice = editText9.getText().toString();
+                        dPrice = Float.parseFloat(strPrice);
+                    }
+                    catch(NumberFormatException e){
+                        System.out.println("[A3] string não tem um formato válido: " + e);
+                    }
+
+                }
+            }
+        });
+
+
+        checkBox2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    editText2.setEnabled(b);
+                    editText9.setEnabled(b);
+
+
+                    try {
+                        strQty = editText2.getText().toString();
+                        dQty = Float.parseFloat(strQty);
+
+                        strPrice = editText9.getText().toString();
+                        dPrice = Float.parseFloat(strPrice);
+                    }
+                    catch(NumberFormatException e){
+                        System.out.println("[A3] string não tem um formato válido: " + e);
+                    }
+
+
+                }
+            }
+        });
+
+        checkBox3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    editText3.setEnabled(b);
+                    editText9.setEnabled(b);
+
+
+                    try {
+                        strQty = editText3.getText().toString();
+                        dQty = Float.parseFloat(strQty);
+
+                        strPrice = editText9.getText().toString();
+                        dPrice = Float.parseFloat(strPrice);
+                    }
+                    catch(NumberFormatException e){
+                        System.out.println("[A3] string não tem um formato válido: " + e);
+                    }
+
+
+                }
+
+            }
+        });
+
+        checkBox4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    editText4.setEnabled(b);
+                    editText9.setEnabled(b);
+
+
+                    try {
+                        strQty = editText4.getText().toString();
+                        dQty = Float.parseFloat(strQty);
+
+                        strPrice = editText9.getText().toString();
+                        dPrice = Float.parseFloat(strPrice);
+                    }
+                    catch(NumberFormatException e){
+                        System.out.println("[A3] string não tem um formato válido: " + e);
+                    }
+
+
+                }
+            }
+        });
+
+        checkBox6.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    editText6.setEnabled(b);
+                    editText9.setEnabled(b);
+
+
+                    try {
+                        strQty = editText6.getText().toString();
+                        dQty = Float.parseFloat(strQty);
+
+                        strPrice = editText9.getText().toString();
+                        dPrice = Float.parseFloat(strPrice);
+                    }
+                    catch(NumberFormatException e){
+                        System.out.println("[A3] string não tem um formato válido: " + e);
+                    }
+
+                }
+            }
+        });
+
+
+
+
+        //
+
+        textViewMsgA3.setText(strQty + "," + strPrice);
 
 
         if (transaction.equals("s")){
