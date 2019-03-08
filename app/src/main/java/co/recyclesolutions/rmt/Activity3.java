@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -37,6 +38,24 @@ public class Activity3 extends AppCompatActivity {
     String strYouEarn;
     float dYouEarn;
 
+    String matType;
+
+
+    protected EditText editText1;
+    protected EditText editText2;
+    protected EditText editText3;
+    protected EditText editText4;
+    protected EditText editText6;
+
+    protected EditText editText9;
+    protected EditText editText10;
+    protected EditText editText11;
+
+
+//    TextView textViewMsgA3 = findViewById(R.id.textViewMsgA3);
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,15 +81,15 @@ public class Activity3 extends AppCompatActivity {
         // Inicializando as views e edits de texto, botão de enviar proposta e os checkboxes
 
 
-        final EditText editText1 = findViewById(R.id.editText1);
-        final EditText editText2 = findViewById(R.id.editText2);
-        final EditText editText3 = findViewById(R.id.editText3);
-        final EditText editText4 = findViewById(R.id.editText4);
-        final EditText editText6 = findViewById(R.id.editText6);
+        editText1 = findViewById(R.id.editText1);
+        editText2 = findViewById(R.id.editText2);
+        editText3 = findViewById(R.id.editText3);
+        editText4 = findViewById(R.id.editText4);
+        editText6 = findViewById(R.id.editText6);
 
-        final EditText editText9 = findViewById(R.id.editText9);
-        EditText editText10 = findViewById(R.id.editText10);
-        EditText editText11 = findViewById(R.id.editText11);
+        editText9 = findViewById(R.id.editText9);
+        editText10 = findViewById(R.id.editText10);
+        editText11 = findViewById(R.id.editText11);
 
         CheckBox checkBox1 = findViewById(R.id.checkBox1);
         CheckBox checkBox2 = findViewById(R.id.checkBox2);
@@ -103,20 +122,9 @@ public class Activity3 extends AppCompatActivity {
                 if (b){
                     editText1.setEnabled(b);
                     editText9.setEnabled(b);
-
-
-                    try {
-                        strQty = editText1.getText().toString();
-                        dQty = Float.parseFloat(strQty);
-
-                        strPrice = editText9.getText().toString();
-                        dPrice = Float.parseFloat(strPrice);
-                    }
-                    catch(NumberFormatException e){
-                        System.out.println("[A3] string não tem um formato válido: " + e);
-                    }
-
                 }
+
+                matType = "Papel";
             }
         });
 
@@ -127,21 +135,9 @@ public class Activity3 extends AppCompatActivity {
                 if (b){
                     editText2.setEnabled(b);
                     editText9.setEnabled(b);
-
-
-                    try {
-                        strQty = editText2.getText().toString();
-                        dQty = Float.parseFloat(strQty);
-
-                        strPrice = editText9.getText().toString();
-                        dPrice = Float.parseFloat(strPrice);
-                    }
-                    catch(NumberFormatException e){
-                        System.out.println("[A3] string não tem um formato válido: " + e);
-                    }
-
-
                 }
+
+                matType = "Plastico";
             }
         });
 
@@ -151,22 +147,9 @@ public class Activity3 extends AppCompatActivity {
                 if (b) {
                     editText3.setEnabled(b);
                     editText9.setEnabled(b);
-
-
-                    try {
-                        strQty = editText3.getText().toString();
-                        dQty = Float.parseFloat(strQty);
-
-                        strPrice = editText9.getText().toString();
-                        dPrice = Float.parseFloat(strPrice);
-                    }
-                    catch(NumberFormatException e){
-                        System.out.println("[A3] string não tem um formato válido: " + e);
-                    }
-
-
                 }
 
+                matType = "Vidro";
             }
         });
 
@@ -176,21 +159,10 @@ public class Activity3 extends AppCompatActivity {
                 if (b){
                     editText4.setEnabled(b);
                     editText9.setEnabled(b);
-
-
-                    try {
-                        strQty = editText4.getText().toString();
-                        dQty = Float.parseFloat(strQty);
-
-                        strPrice = editText9.getText().toString();
-                        dPrice = Float.parseFloat(strPrice);
-                    }
-                    catch(NumberFormatException e){
-                        System.out.println("[A3] string não tem um formato válido: " + e);
-                    }
-
-
                 }
+
+                matType = "Metal";
+
             }
         });
 
@@ -200,20 +172,9 @@ public class Activity3 extends AppCompatActivity {
                 if (b){
                     editText6.setEnabled(b);
                     editText9.setEnabled(b);
-
-
-                    try {
-                        strQty = editText6.getText().toString();
-                        dQty = Float.parseFloat(strQty);
-
-                        strPrice = editText9.getText().toString();
-                        dPrice = Float.parseFloat(strPrice);
-                    }
-                    catch(NumberFormatException e){
-                        System.out.println("[A3] string não tem um formato válido: " + e);
-                    }
-
                 }
+
+                matType = "Outros";
             }
         });
 
@@ -222,23 +183,68 @@ public class Activity3 extends AppCompatActivity {
 
         //
 
-        textViewMsgA3.setText(strQty + "," + strPrice);
+         // textViewMsgA3.setText(strQty + "," + strPrice);
 
 
         if (transaction.equals("s")){
             textView.setText(R.string.trans_sell);
 
+            Button buttonSend = (Button) findViewById(R.id.button);
+            buttonSend.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            sendProposal();
+                        }
+                    }
+            );
+
         }
         if (transaction.equals("b")){
             textView.setText(R.string.trans_buy);
+
+            Button buttonSend = (Button) findViewById(R.id.button);
+            buttonSend.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            sendProposal();
+                        }
+                    }
+            );
+
 
         }
         if (transaction.equals("t")){
             textView.setText(R.string.trans_transport);
 
+            Button buttonSend = (Button) findViewById(R.id.button);
+            buttonSend.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            sendProposal();
+                        }
+                    }
+            );
+
         }
         if (transaction.equals("d")){
             textView.setText(R.string.trans_donate);
+
+            editText9.setEnabled(false);
+            editText9.setText("0");
+
+
+            Button buttonSend = (Button) findViewById(R.id.button);
+            buttonSend.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            sendProposal();
+                        }
+                    }
+            );
 
         }
 
@@ -304,6 +310,81 @@ public class Activity3 extends AppCompatActivity {
         startActivity(reg_intent);
 
     }
+
+
+    private float getdQty(String str1){
+
+        float varF1 = 0;
+
+        try {
+            //strQty = editText6.getText().toString();
+            varF1 = Float.parseFloat(str1);
+
+        }
+        catch(NumberFormatException e){
+            System.out.println("[A3] A string 1 " + str1 + " não tem um formato válido: " + e);
+        }
+        return varF1;
+    }
+
+    private float getdPrice(String str2){
+
+        float varF2 = 0;
+
+        try {
+            //strQty = editText6.getText().toString();
+            varF2 = Float.parseFloat(str2);
+
+        }
+        catch(NumberFormatException e){
+            System.out.println("[A3] A string 2 " + str2 + " não tem um formato válido: " + e);
+        }
+        return varF2;
+    }
+
+    private void sendProposal(){
+
+
+        switch (matType){
+
+            case "Papel":
+                strQty = editText1.getText().toString();
+                dQty = getdQty(strQty);
+                strPrice = editText9.getText().toString();
+                dPrice = getdPrice(strPrice);
+                break;
+            case "Plastico":
+                strQty = editText2.getText().toString();
+                dQty = getdQty(strQty);
+                strPrice = editText9.getText().toString();
+                dPrice = getdPrice(strPrice);
+                break;
+            case "Vidro":
+                strQty = editText3.getText().toString();
+                dQty = getdQty(strQty);
+                strPrice = editText9.getText().toString();
+                dPrice = getdPrice(strPrice);
+                break;
+            case "Metal":
+                strQty = editText4.getText().toString();
+                dQty = getdQty(strQty);
+                strPrice = editText9.getText().toString();
+                dPrice = getdPrice(strPrice);
+                break;
+            default:
+                strQty = editText6.getText().toString();
+                dQty = getdQty(strQty);
+                strPrice = editText9.getText().toString();
+                dPrice = getdPrice(strPrice);
+
+
+        }
+
+        TextView textViewMsgA3 = findViewById(R.id.textViewMsgA3);
+        textViewMsgA3.setText(transaction + ", " + matType + ", " + strQty + ", " + strPrice);
+    }
+
+
 
 
 }
