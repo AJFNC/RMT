@@ -6,6 +6,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -233,7 +235,9 @@ public class Activity3 extends AppCompatActivity {
             textView.setText(R.string.trans_donate);
 
             editText9.setEnabled(false);
-            editText9.setText("0");
+            editText9.setText("0.00");
+            editText10.setText("0.00");
+            editText11.setText("0.00");
 
 
             Button buttonSend = (Button) findViewById(R.id.button);
@@ -247,6 +251,36 @@ public class Activity3 extends AppCompatActivity {
             );
 
         }
+
+
+
+        editText9.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                strCost = editText9.getText().toString();
+                float tmpPrice = getdPrice(strCost);
+                dCost = (float) (tmpPrice * 0.1);
+                dYouEarn = tmpPrice - dCost;
+
+                editText10.setText(Float.toString(dCost));
+                editText11.setText((Float.toString(dYouEarn)));
+
+            }
+        });
+
+
+
 
     }
 
