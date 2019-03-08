@@ -30,7 +30,7 @@ public class Activity1 extends AppCompatActivity {
         }, 2000);
 
         TextView textViewVersion = findViewById(R.id.textViewVersion);
-        textViewVersion.setText("Versão: " + "4");
+        textViewVersion.setText("Versão: " + "1.4");
 
 
 

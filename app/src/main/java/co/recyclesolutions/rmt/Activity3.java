@@ -40,7 +40,7 @@ public class Activity3 extends AppCompatActivity {
     String strYouEarn;
     float dYouEarn;
 
-    String matType;
+    String matType = "";
 
 
     protected EditText editText1;
@@ -405,17 +405,31 @@ public class Activity3 extends AppCompatActivity {
                 strPrice = editText9.getText().toString();
                 dPrice = getdPrice(strPrice);
                 break;
-            default:
+            case "Outros":
                 strQty = editText6.getText().toString();
                 dQty = getdQty(strQty);
                 strPrice = editText9.getText().toString();
                 dPrice = getdPrice(strPrice);
-
-
+            default:
+                finish();
         }
 
         TextView textViewMsgA3 = findViewById(R.id.textViewMsgA3);
         textViewMsgA3.setText(transaction + ", " + matType + ", " + strQty + ", " + strPrice);
+
+
+        Intent prop_intent = new Intent(Activity3.this, ProposalActivity.class);
+        Bundle bundleRA = new Bundle();
+        //bundleRA.putString("email", "");
+        //bundleRA.putString("password", "");
+        //bundleRA.putString("msg", "cadastrar");
+        //bundleRA.putString("msg", "");
+        bundleRA.putString("trans",transaction);
+        bundleRA.putString("host", strHostA3);
+        prop_intent.putExtras(bundleRA);
+        startActivity(prop_intent);
+
+
     }
 
 

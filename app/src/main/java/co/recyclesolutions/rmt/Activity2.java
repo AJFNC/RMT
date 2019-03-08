@@ -181,8 +181,14 @@ public class Activity2 extends AppCompatActivity {
     }
 
 
+    private void callUseTermAct(){
+        Intent reg_intent = new Intent(Activity2.this, UseTermActivity.class);
+        startActivity(reg_intent);
 
-    ////////////////// Fim dos métodos iplementados
+    }
+
+
+    ////////////////// Fim dos métodos implementados
 
     // Cria o menu de opções na barra de ferramentas do aplicativo
 
@@ -204,19 +210,25 @@ public class Activity2 extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        // cadastrar cliente para vender
         if (id == R.id.SignUp_settings) {
             callRegisterAct();
 
         }
 
-        //noinspection SimplifiableIfStatement
+        // Configuração do servidor
         if (id == R.id.Setup_settings) {
             callConfigAct();
 
         }
 
-        //noinspection SimplifiableIfStatement
+        // Termo de uso
+        if (id == R.id.Term_settings) {
+            callUseTermAct();
+
+        }
+
+        // Sair do aplicativo
         if (id == R.id.action_settings) {
             finishAffinity();
             System.exit(0);

@@ -16,6 +16,7 @@
     <string name="title_activity_2">O que deseja?</string>
     <string name="SignUp_settings">Cadastrar</string>
     <string name="Setup_settings">Configurar</string>
+    <string name="Term_settings">Termo de Uso</string>
     <string name="action_settings">Sair</string>
     <string name="title_activity_3">Proposta</string>
     <string name="title_activity_register">Cadastro</string>
@@ -60,6 +61,34 @@
     <string name="cb_others">Outros</string>
 
     <string name="reg_button">Enviar</string>
+
+    <string name="Term_of_Use">"TERMOS E CONDIÇÕES DA RECYCLE SOLUTIONS
+
+        1.      RELAÇÃO CONTRATUAL
+        2.      OS SERVIÇOS
+        3.      O USO DOS SERVIÇOS
+        4.      PAGAMENTO
+        5.      PROPRIEDADE INTELECTUAL
+                 DIREITOS AUTORAIS E
+                 CONFIDENCIALIDADE
+        6.      ISENÇÕES DE RESPONSABILIDADE
+                 LIMITAÇÃO DE RESPONSABILIDADE
+                 INDENIZAÇÃO
+        7.      DISPUTAS ENTRE FREELANCERS E
+                 USUÁRIOS
+        8.      DISPUTAS COM A RECYCLE SOLUTIONS
+        9.      OUTRAS DISPOSIÇÕES
+
+
+        AO CLICAR EM “ACEITO”, VOCÊ RECONHECE
+        EXPRESSAMENTE QUE LEU, COMPREENDEU
+        E TOMOU AS MEDIDAS PARA CONSIDERAR
+        SERIAMENTE AS CONSEQUÊNCIAS DESTE
+        ACORDO, EM QUE SE COMPROMETE A FICAR
+        OBRIGADO PELOS TERMOS E CONDIÇÕES
+        DO ACORDO, E QUE É LEGALMENTE
+        COMPETENTE PARA CELEBRAR ESTE
+        ACORDO COM A RS"</string>
 
     ,
 </resources>

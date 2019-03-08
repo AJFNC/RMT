@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ConfigActivity"></activity>
+        <activity android:name=".ProposalActivity"></activity>
+        <activity android:name=".UseTermActivity" />
+        <activity android:name=".ConfigActivity" />
         <activity
             android:name=".Activity1"
             android:theme="@style/AppCompat.RealFullScreen">
