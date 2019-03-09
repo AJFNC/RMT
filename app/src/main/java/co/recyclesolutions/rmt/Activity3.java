@@ -419,14 +419,13 @@ public class Activity3 extends AppCompatActivity {
 
 
         Intent prop_intent = new Intent(Activity3.this, ProposalActivity.class);
-        Bundle bundleRA = new Bundle();
-        //bundleRA.putString("email", "");
-        //bundleRA.putString("password", "");
-        //bundleRA.putString("msg", "cadastrar");
-        //bundleRA.putString("msg", "");
-        bundleRA.putString("trans",transaction);
-        bundleRA.putString("host", strHostA3);
-        prop_intent.putExtras(bundleRA);
+        Bundle bundleProp = new Bundle();
+        bundleProp.putString("type",matType);
+        bundleProp.putString("qty",strQty);
+        bundleProp.putString("price",strPrice);
+        bundleProp.putString("trans",transaction);
+        bundleProp.putString("host", strHostA3);
+        prop_intent.putExtras(bundleProp);
         startActivity(prop_intent);
 
 

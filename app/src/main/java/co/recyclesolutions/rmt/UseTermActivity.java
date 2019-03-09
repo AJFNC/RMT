@@ -29,7 +29,7 @@ public class UseTermActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        term = "Aceito os termos da RS";
+                        term = getString(R.string.text_agree_term_of_use);
                         finish();
                     }
                 }

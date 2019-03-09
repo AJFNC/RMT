@@ -36,6 +36,8 @@
     <string name="text_error_connection">Problema de conexão!</string>
     <string name="text_sending_data">Enviando dados...</string>
     <string name="text_version">Versão</string>
+    <string name="text_agree">Aceitar</string>
+    <string name="text_agree_term_of_use">Sim</string>
 
     <string name="trans_action">Transação</string>
     <string name="trans_sell">Vender</string>
