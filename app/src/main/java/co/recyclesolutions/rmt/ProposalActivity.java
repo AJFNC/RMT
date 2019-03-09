@@ -3,6 +3,9 @@ package co.recyclesolutions.rmt;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 public class ProposalActivity extends AppCompatActivity {
@@ -20,6 +23,19 @@ public class ProposalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_proposal);
 
         TextView propTextView = findViewById(R.id.textView11);
+
+        WebView wvRS = findViewById(R.id.webview1);
+
+
+        //WebSettings wsRS = wvRS.getSettings();
+        wvRS.getSettings().setJavaScriptEnabled(true);
+
+       // wvRS.getSettings().setAllowFileAccess(true);
+        wvRS.setWebViewClient(new MyWebViewClient());
+        wvRS.loadUrl("http://recyclesolutions.co");
+
+
+
 
         // Pega a transação solicitada
 
@@ -46,4 +62,17 @@ public class ProposalActivity extends AppCompatActivity {
 
 
     }
+
+
+    private class MyWebViewClient extends WebViewClient {
+
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url){
+            view.loadUrl(url);
+            return false;
+        }
+    }
+
+
 }
