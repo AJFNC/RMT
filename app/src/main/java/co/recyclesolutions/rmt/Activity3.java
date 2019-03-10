@@ -93,11 +93,11 @@ public class Activity3 extends AppCompatActivity {
         editText10 = findViewById(R.id.editText10);
         editText11 = findViewById(R.id.editText11);
 
-        CheckBox checkBox1 = findViewById(R.id.checkBox1);
-        CheckBox checkBox2 = findViewById(R.id.checkBox2);
-        CheckBox checkBox3 = findViewById(R.id.checkBox3);
-        CheckBox checkBox4 = findViewById(R.id.checkBox4);
-        CheckBox checkBox6 = findViewById(R.id.checkBox6);
+        final CheckBox checkBox1 = findViewById(R.id.checkBox1);
+        final CheckBox checkBox2 = findViewById(R.id.checkBox2);
+        final CheckBox checkBox3 = findViewById(R.id.checkBox3);
+        final CheckBox checkBox4 = findViewById(R.id.checkBox4);
+        final CheckBox checkBox6 = findViewById(R.id.checkBox6);
 
 
 
@@ -124,6 +124,21 @@ public class Activity3 extends AppCompatActivity {
                 if (b){
                     editText1.setEnabled(b);
                     editText9.setEnabled(b);
+
+                    editText2.setEnabled(false);
+                    editText3.setEnabled(false);
+                    editText4.setEnabled(false);
+                    editText6.setEnabled(false);
+
+                    editText2.setText("");
+                    editText3.setText("");
+                    editText4.setText("");
+                    editText6.setText("");
+
+                    checkBox2.setChecked(false);
+                    checkBox3.setChecked(false);
+                    checkBox4.setChecked(false);
+                    checkBox6.setChecked(false);
                 }
 
                 matType = "Papel";
@@ -137,6 +152,21 @@ public class Activity3 extends AppCompatActivity {
                 if (b){
                     editText2.setEnabled(b);
                     editText9.setEnabled(b);
+
+                    editText1.setEnabled(false);
+                    editText3.setEnabled(false);
+                    editText4.setEnabled(false);
+                    editText6.setEnabled(false);
+
+                    editText1.setText("");
+                    editText3.setText("");
+                    editText4.setText("");
+                    editText6.setText("");
+
+                    checkBox1.setChecked(false);
+                    checkBox3.setChecked(false);
+                    checkBox4.setChecked(false);
+                    checkBox6.setChecked(false);
                 }
 
                 matType = "Plastico";
@@ -149,6 +179,21 @@ public class Activity3 extends AppCompatActivity {
                 if (b) {
                     editText3.setEnabled(b);
                     editText9.setEnabled(b);
+
+                    editText1.setEnabled(false);
+                    editText2.setEnabled(false);
+                    editText4.setEnabled(false);
+                    editText6.setEnabled(false);
+
+                    editText1.setText("");
+                    editText2.setText("");
+                    editText4.setText("");
+                    editText6.setText("");
+
+                    checkBox1.setChecked(false);
+                    checkBox2.setChecked(false);
+                    checkBox4.setChecked(false);
+                    checkBox6.setChecked(false);
                 }
 
                 matType = "Vidro";
@@ -161,6 +206,21 @@ public class Activity3 extends AppCompatActivity {
                 if (b){
                     editText4.setEnabled(b);
                     editText9.setEnabled(b);
+
+                    editText1.setEnabled(false);
+                    editText2.setEnabled(false);
+                    editText3.setEnabled(false);
+                    editText6.setEnabled(false);
+
+                    editText1.setText("");
+                    editText2.setText("");
+                    editText3.setText("");
+                    editText6.setText("");
+
+                    checkBox1.setChecked(false);
+                    checkBox2.setChecked(false);
+                    checkBox3.setChecked(false);
+                    checkBox6.setChecked(false);
                 }
 
                 matType = "Metal";
@@ -174,6 +234,21 @@ public class Activity3 extends AppCompatActivity {
                 if (b){
                     editText6.setEnabled(b);
                     editText9.setEnabled(b);
+
+                    editText1.setEnabled(false);
+                    editText2.setEnabled(false);
+                    editText3.setEnabled(false);
+                    editText4.setEnabled(false);
+
+                    editText1.setText("");
+                    editText2.setText("");
+                    editText3.setText("");
+                    editText4.setText("");
+
+                    checkBox1.setChecked(false);
+                    checkBox2.setChecked(false);
+                    checkBox3.setChecked(false);
+                    checkBox4.setChecked(false);
                 }
 
                 matType = "Outros";
@@ -181,9 +256,6 @@ public class Activity3 extends AppCompatActivity {
         });
 
 
-
-
-        //
 
          // textViewMsgA3.setText(strQty + "," + strPrice);
 
@@ -304,14 +376,20 @@ public class Activity3 extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+
         if (id == R.id.SignUp_settings) {
             callRegAct();
 
         }
 
 
-        //noinspection SimplifiableIfStatement
+        // Termo de uso
+        if (id == R.id.Term_settings) {
+            callUseTermAct();
+
+        }
+
+
         if (id == R.id.action_settings) {
             finishAffinity();
             System.exit(0);
@@ -428,6 +506,17 @@ public class Activity3 extends AppCompatActivity {
         prop_intent.putExtras(bundleProp);
         startActivity(prop_intent);
 
+
+    }
+
+
+    // Chama Activity de Configuração
+
+
+
+    private void callUseTermAct(){
+        Intent reg_intent = new Intent(Activity3.this, UseTermActivity.class);
+        startActivity(reg_intent);
 
     }
 

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static co.recyclesolutions.rmt.R.id.button6;
 
@@ -30,6 +31,9 @@ public class UseTermActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         term = getString(R.string.text_agree_term_of_use);
+
+                        Toast.makeText(getApplicationContext(), "Você aceitou o termo!", Toast.LENGTH_SHORT).show();
+
                         finish();
                     }
                 }

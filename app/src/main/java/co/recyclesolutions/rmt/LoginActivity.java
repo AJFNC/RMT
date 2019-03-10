@@ -31,6 +31,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
@@ -457,6 +458,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 System.out.println("[LA]3 " + strBuffer + " Se o usario já existe, vá para as transações");
 
+                Toast.makeText(getApplicationContext(), "Usuário autorizado!", Toast.LENGTH_SHORT).show();
+
                 Intent log_intent = new Intent(LoginActivity.this, Activity3.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("trans",actionL);      // Após cadastrado com sucesso usuário vai para a transação de venda
@@ -475,6 +478,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                      System.out.println("[LA]4 " + "Acesso negato, volta para o login");
 
+                    Toast.makeText(getApplicationContext(), "Problema de conexão ou senha errada!", Toast.LENGTH_SHORT).show();
+
                      // Pode mandar ele de volta para o Login
 
                 }
@@ -483,6 +488,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     // Se não teve sucesso, então faça o registro do usuário
 
                     System.out.println("[LA]5 " + "Não teve sucesso, fazer cadastro");
+
+                    Toast.makeText(getApplicationContext(), "Se cadastre para usar!", Toast.LENGTH_SHORT).show();
 
                     Intent reg_intent = new Intent(LoginActivity.this, RegisterActivity.class);
                     Bundle bundleRA = new Bundle();

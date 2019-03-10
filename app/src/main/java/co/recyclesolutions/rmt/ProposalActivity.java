@@ -32,7 +32,7 @@ public class ProposalActivity extends AppCompatActivity {
 
        // wvRS.getSettings().setAllowFileAccess(true);
         wvRS.setWebViewClient(new MyWebViewClient());
-        wvRS.loadUrl("http://recyclesolutions.co");
+        wvRS.loadUrl("https://recycle-solutions.firebaseapp.com");
 
 
 

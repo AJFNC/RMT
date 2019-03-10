@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -135,6 +136,8 @@ public class RegisterActivity extends AppCompatActivity {
 
             System.out.println("[RA]3 Usuário não existe!");
 
+
+            Toast.makeText(getApplicationContext(), "Usuário não existe!", Toast.LENGTH_SHORT).show();
 
             sendingRegButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -333,6 +336,8 @@ public class RegisterActivity extends AppCompatActivity {
                 if (rAction == "s") {
                     // Como o usuário já está cadastrado vai para a transação de venda (Activity3)
 
+                    Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+
                     Intent log_intent = new Intent(RegisterActivity.this, Activity3.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("trans", "s");      // Após cadastrado com sucesso usuário vai para a transação de venda
@@ -341,12 +346,16 @@ public class RegisterActivity extends AppCompatActivity {
                     log_intent.putExtras(bundle);
                     startActivity(log_intent);
 
+
+
                     finish();
 
                 }
                 else{
 
                     System.out.println("[RA]7 " + "Sucesso ao cadastrar o usuario para qualquer operação");
+
+                    Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(RegisterActivity.this,Activity2.class);
                     startActivity(intent);
