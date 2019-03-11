@@ -23,6 +23,9 @@ public class Activity2 extends AppCompatActivity {
     private String transaction;
     private String host="http://192.168.1.54/";
 
+    String a2Name;
+    String a2Whtspp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,9 @@ public class Activity2 extends AppCompatActivity {
         if(bundle != null){
 
             host = bundle.getString("host");
+            a2Name = bundle.getString("name");
+            a2Whtspp = bundle.getString("whatsapp");
+
         }
 
 
@@ -121,6 +127,8 @@ public class Activity2 extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putString("trans",transaction);
         bundle.putString("host", host);
+        bundle.putString("name", a2Name);
+        bundle.putString("whatsapp", a2Whtspp );
         buy_intent.putExtras(bundle);
         startActivity(buy_intent);
     }
@@ -133,6 +141,8 @@ public class Activity2 extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putString("trans",transaction);
         bundle.putString("host", host);
+        bundle.putString("name", a2Name);
+        bundle.putString("whatsapp", a2Whtspp );
         transport_intent.putExtras(bundle);
         startActivity(transport_intent);
     }
@@ -145,6 +155,8 @@ public class Activity2 extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putString("trans",transaction);
         bundle.putString("host", host);
+        bundle.putString("name", a2Name);
+        bundle.putString("whatsapp", a2Whtspp );
         donate_intent.putExtras(bundle);
         startActivity(donate_intent);
 
@@ -224,7 +236,7 @@ public class Activity2 extends AppCompatActivity {
 
         // Termo de uso
         if (id == R.id.Term_settings) {
-            callUseTermAct();
+           // callUseTermAct();
 
         }
 

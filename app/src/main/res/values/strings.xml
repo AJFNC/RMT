@@ -51,6 +51,7 @@
     <string name="prop_tprice">Valor Total</string>
     <string name="prop_service">Custo do serviço</string>
     <string name="prop_earning">Você receberá</string>
+    <string name="prop_paying">Você pagará</string>
 
     <string name="cb_org">Orgânico/Madeira</string>
     <string name="cb_metal">Meta/Alumínio/Ferro</string>
@@ -93,5 +94,5 @@
         COMPETENTE PARA CELEBRAR ESTE
         ACORDO COM A RS"</string>
 
-    ,
+    <string name="prop_text_model">""</string>
 </resources>

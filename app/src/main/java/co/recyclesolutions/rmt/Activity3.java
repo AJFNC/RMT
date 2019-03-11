@@ -16,7 +16,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 // This Activity is the Negociation class
@@ -27,6 +27,9 @@ public class Activity3 extends AppCompatActivity {
     String transaction;
     String strHostA3;
     String msgA3;
+    String clientName;
+    String a3Term = null;
+    String a3Whtspp;
 
     String strQty;
     float dQty;
@@ -74,6 +77,9 @@ public class Activity3 extends AppCompatActivity {
             transaction = bundle.getString("trans");
             strHostA3 = bundle.getString("host");
             msgA3 = bundle.getString("msg");
+            clientName = bundle.getString("name");
+            a3Term = bundle.getString("term");
+            a3Whtspp = bundle.getString("whatsapp");
         }
 
         TextView textView = findViewById(R.id.textView);
@@ -82,6 +88,7 @@ public class Activity3 extends AppCompatActivity {
 
         // Inicializando as views e edits de texto, botão de enviar proposta e os checkboxes
 
+        TextView textView6 = findViewById(R.id.textView6);
 
         editText1 = findViewById(R.id.editText1);
         editText2 = findViewById(R.id.editText2);
@@ -123,7 +130,7 @@ public class Activity3 extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b){
                     editText1.setEnabled(b);
-                    editText9.setEnabled(b);
+                    //editText9.setEnabled(b);
 
                     editText2.setEnabled(false);
                     editText3.setEnabled(false);
@@ -151,7 +158,7 @@ public class Activity3 extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b){
                     editText2.setEnabled(b);
-                    editText9.setEnabled(b);
+                    //editText9.setEnabled(b);
 
                     editText1.setEnabled(false);
                     editText3.setEnabled(false);
@@ -178,7 +185,7 @@ public class Activity3 extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     editText3.setEnabled(b);
-                    editText9.setEnabled(b);
+                    //editText9.setEnabled(b);
 
                     editText1.setEnabled(false);
                     editText2.setEnabled(false);
@@ -205,7 +212,7 @@ public class Activity3 extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b){
                     editText4.setEnabled(b);
-                    editText9.setEnabled(b);
+                    //editText9.setEnabled(b);
 
                     editText1.setEnabled(false);
                     editText2.setEnabled(false);
@@ -233,7 +240,7 @@ public class Activity3 extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b){
                     editText6.setEnabled(b);
-                    editText9.setEnabled(b);
+                    //editText9.setEnabled(b);
 
                     editText1.setEnabled(false);
                     editText2.setEnabled(false);
@@ -263,6 +270,8 @@ public class Activity3 extends AppCompatActivity {
         if (transaction.equals("s")){
             textView.setText(R.string.trans_sell);
 
+            editText9.setEnabled(true);
+
             Button buttonSend = (Button) findViewById(R.id.button);
             buttonSend.setOnClickListener(
                     new View.OnClickListener() {
@@ -276,6 +285,9 @@ public class Activity3 extends AppCompatActivity {
         }
         if (transaction.equals("b")){
             textView.setText(R.string.trans_buy);
+            textView6.setText(R.string.prop_paying);
+
+            editText9.setEnabled(true);
 
             Button buttonSend = (Button) findViewById(R.id.button);
             buttonSend.setOnClickListener(
@@ -291,6 +303,9 @@ public class Activity3 extends AppCompatActivity {
         }
         if (transaction.equals("t")){
             textView.setText(R.string.trans_transport);
+            textView6.setText(R.string.prop_paying);
+
+            editText9.setEnabled(true);
 
             Button buttonSend = (Button) findViewById(R.id.button);
             buttonSend.setOnClickListener(
@@ -305,12 +320,12 @@ public class Activity3 extends AppCompatActivity {
         }
         if (transaction.equals("d")){
             textView.setText(R.string.trans_donate);
+            textView6.setText(R.string.prop_paying);
 
-            editText9.setEnabled(false);
             editText9.setText("0.00");
             editText10.setText("0.00");
             editText11.setText("0.00");
-
+            editText9.setEnabled(false);
 
             Button buttonSend = (Button) findViewById(R.id.button);
             buttonSend.setOnClickListener(
@@ -342,9 +357,15 @@ public class Activity3 extends AppCompatActivity {
 
                 strCost = editText9.getText().toString();
                 float tmpPrice = getdPrice(strCost);
-                dCost = (float) (tmpPrice * 0.1);
-                dYouEarn = tmpPrice - dCost;
 
+                if (transaction.equals("s")){
+                    dCost = (float) (tmpPrice * 0.1);
+                    dYouEarn = tmpPrice - dCost;
+                }
+                else {
+                    dCost = (float) (tmpPrice * 0.1);
+                    dYouEarn = tmpPrice + dCost;
+                }
                 editText10.setText(Float.toString(dCost));
                 editText11.setText((Float.toString(dYouEarn)));
 
@@ -488,24 +509,30 @@ public class Activity3 extends AppCompatActivity {
                 dQty = getdQty(strQty);
                 strPrice = editText9.getText().toString();
                 dPrice = getdPrice(strPrice);
-            default:
-                finish();
+            //default:
+             //   finish();
         }
 
         TextView textViewMsgA3 = findViewById(R.id.textViewMsgA3);
         textViewMsgA3.setText(transaction + ", " + matType + ", " + strQty + ", " + strPrice);
 
+        if (a3Term == null){
 
-        Intent prop_intent = new Intent(Activity3.this, ProposalActivity.class);
-        Bundle bundleProp = new Bundle();
-        bundleProp.putString("type",matType);
-        bundleProp.putString("qty",strQty);
-        bundleProp.putString("price",strPrice);
-        bundleProp.putString("trans",transaction);
-        bundleProp.putString("host", strHostA3);
-        prop_intent.putExtras(bundleProp);
-        startActivity(prop_intent);
-
+            Toast.makeText(getApplicationContext(), "Por favor aceite o Termo de Uso!", Toast.LENGTH_SHORT).show();
+        }
+        else if (a3Term.equals("Sim")){
+            Intent prop_intent = new Intent(Activity3.this, ProposalActivity.class);
+            Bundle bundleProp = new Bundle();
+            bundleProp.putString("type", matType);
+            bundleProp.putString("qty", strQty);
+            bundleProp.putString("price", strPrice);
+            bundleProp.putString("trans", transaction);
+            bundleProp.putString("host", strHostA3);
+            bundleProp.putString("name", clientName);
+            bundleProp.putString("whatsapp", a3Whtspp);
+            prop_intent.putExtras(bundleProp);
+            startActivity(prop_intent);
+        }
 
     }
 
@@ -515,8 +542,17 @@ public class Activity3 extends AppCompatActivity {
 
 
     private void callUseTermAct(){
-        Intent reg_intent = new Intent(Activity3.this, UseTermActivity.class);
-        startActivity(reg_intent);
+        Intent intent = new Intent(Activity3.this, UseTermActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("type", matType);
+        bundle.putString("qty", strQty);
+        bundle.putString("price", strPrice);
+        bundle.putString("trans", transaction);
+        bundle.putString("host", strHostA3);
+        //bundle.putString("name", clientName);
+        //bundle.putString("whatsapp", a3Whtspp);
+        intent.putExtras(bundle);
+        startActivity(intent);
 
     }
 

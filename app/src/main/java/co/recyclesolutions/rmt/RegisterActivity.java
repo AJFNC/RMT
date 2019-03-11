@@ -48,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
     String rPass;
     String rBuffer;
     String rEmail;
+    String rWhtspp;
 
     String rName;
 
@@ -83,6 +84,8 @@ public class RegisterActivity extends AppCompatActivity {
             rBuffer = bundle.getString("msg");
             strHost = bundle.getString("host");
         }
+
+        rName = rEmail;
 
         textViewMsg.setText(rBuffer);
 
@@ -341,7 +344,8 @@ public class RegisterActivity extends AppCompatActivity {
                     Intent log_intent = new Intent(RegisterActivity.this, Activity3.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("trans", "s");      // Após cadastrado com sucesso usuário vai para a transação de venda
-                    bundle.putString("trans", rName);
+                    bundle.putString("name", rName);
+                    bundle.putString("whatsapp", rWhtspp);
                     bundle.putString("host", strHost);
                     log_intent.putExtras(bundle);
                     startActivity(log_intent);
@@ -358,6 +362,9 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(RegisterActivity.this,Activity2.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name", rName);
+                    bundle.putString("whatsapp", rWhtspp);
                     startActivity(intent);
 
                     finish();

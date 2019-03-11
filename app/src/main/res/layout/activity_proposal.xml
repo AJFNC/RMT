@@ -33,7 +33,7 @@
         android:layout_width="177dp"
         android:layout_height="84dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="@string/reg_button7"
         android:textColor="@android:color/white"
