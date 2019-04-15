@@ -69,7 +69,7 @@ public class UseTermActivity extends AppCompatActivity {
                         termName = tvName.getText().toString();
                         termWhtspp = tvWhtspp.getText().toString();
 
-                        if (termWhtspp == null){
+                        if (termWhtspp == ""){
 
                                 Toast.makeText(getApplicationContext(), "Preencha o Nome e o Whatsapp. Depois Aceite!", Toast.LENGTH_SHORT).show();
                                 finish();
@@ -100,4 +100,6 @@ public class UseTermActivity extends AppCompatActivity {
         );
 
     }
+
+
 }

@@ -519,6 +519,7 @@ public class Activity3 extends AppCompatActivity {
         if (a3Term == null){
 
             Toast.makeText(getApplicationContext(), "Por favor aceite o Termo de Uso!", Toast.LENGTH_SHORT).show();
+            callUseTermAct();
         }
         else if (a3Term.equals("Sim")){
             Intent prop_intent = new Intent(Activity3.this, ProposalActivity.class);

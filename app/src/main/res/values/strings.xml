@@ -42,7 +42,7 @@
     <string name="trans_action">Transação</string>
     <string name="trans_sell">Vender</string>
     <string name="trans_buy">Comprar</string>
-    <string name="trans_transport">Transportar</string>
+    <string name="trans_transport">Coletar</string>
     <string name="trans_donate">Doar</string>
     <string name="trans_reg">n</string>
 

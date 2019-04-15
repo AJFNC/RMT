@@ -22,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,6 +33,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
@@ -69,9 +77,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     String strHostL;
 
 
+    public String mEmail;
+    public String mPassword;
+    public String strBuffer;
+
     ///
 
     //public URLConnection conn;
+
+
+    // Firebase config
+
+    public static final String TAG = "FB";
+    private FirebaseAuth mAuth;
+    boolean res = false;
 
 
 
@@ -102,12 +121,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
         populateAutoComplete();
+
+        // Firebase initialization
+
+
+
+        FirebaseApp.initializeApp(this);
+
+        mAuth = FirebaseAuth.getInstance();
 
         textViewLMsg = findViewById(R.id.textView9);
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -127,7 +154,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             strHostL = bundle.getString("host");
         }
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -250,10 +277,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
 
-        if (email.contains(" "))
-            return false;
-        else
+        if (email.contains("@"))
             return true;
+        else
+            return false;
     }
 
     private boolean isPasswordValid(String password) {
@@ -357,9 +384,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mEmail;
-        private final String mPassword;
-        private String strBuffer;
+
 
 
 
@@ -368,14 +393,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mPassword = password;
         }
 
-        public String getStrBuffer(){                   //Método que vai permitir verificar o conteúdo do Buffer de retorno do servidor
-            return this.strBuffer;
-        }
+       // public String getStrBuffer(){                   //Método que vai permitir verificar o conteúdo do Buffer de retorno do servidor
+       //     return this.strBuffer;
+        //}
 
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
+            /*
 
             String link = "http://192.168.1.176/loginuser.php";
             String linkA = "http://192.168.1.176:8080/loginuser.php";
@@ -440,7 +466,83 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 return false;
             }
+            */
 
+            // Checking the user entry
+
+            // Check user/pass, if exists write into FB, else create user
+
+
+
+            FirebaseUser user = mAuth.getCurrentUser();
+            Log.d(TAG, "CurrentUser = " + user);
+            String userUI = mAuth.getUid();
+            Log.d(TAG, "UserID = " + userUI);
+
+            ////
+
+            Log.d(TAG, "Email = " + email);
+            Log.d(TAG, "Password = " + password);
+
+
+            // Let's use IFs to figure authentication out
+
+            try {
+                if ((user == null) || (userUI == null)){
+                    if ((password == null) || password.equals("")) {
+                        //Toast.makeText(LoginActivity.this, "Digite seu email e senha!",
+                           //     Toast.LENGTH_SHORT).show();
+                        System.out.println("[LA]1.1 " + " Digite seu email e senha!");
+                    }
+                    else
+                        signInUser();
+                    if (!res) {
+                        //createUser(email,password);       // Send it to RegisterActivity
+                        //signUp();
+                       // Toast.makeText(LoginActivity.this, "Cadastre seu email e senha!",
+                       //         Toast.LENGTH_SHORT).show();
+                        System.out.println("[LA]1.2 " + " Cadastre seu email e senha!");
+                    }
+                }
+                if (user.getEmail().equals(email)) {    // Check if the user typed his/her email
+                    if ((password == null) || password.equals("")) {
+                       // Toast.makeText(LoginActivity.this, "Digite seu email e senha!",
+                        //        Toast.LENGTH_SHORT).show();
+                        System.out.println("[LA]1.3 " + " Digite seu email e senha!");
+                    }
+                    else {
+                        signInUser();
+
+                    }
+                    if (!res) {
+                       // createUser(email,password);   // Send it to RegisterActivity
+                        //signUp();
+                        //Toast.makeText(LoginActivity.this, "Cadastre seu email e senha!",
+                        //        Toast.LENGTH_SHORT).show();
+                        System.out.println("[LA]1.4 " + " Cadastre seu email e senha!");
+                    }
+                }
+                if (user.getEmail() == null){
+                   //createUser(email, password);      // Send it to RegisterActivity
+                    //signUp();
+                    //Toast.makeText(LoginActivity.this, "Cadastre seu email e senha!",
+                     //       Toast.LENGTH_SHORT).show();
+                    System.out.println("[LA]1.5 " + " Cadastre seu email e senha!");
+
+                }
+                if (user.getEmail().equals("")){        // Checked if the user didn't type any email
+                    //Toast.makeText(LoginActivity.this, "Digite seu email e senha!",
+                     //       Toast.LENGTH_SHORT).show();
+                    System.out.println("[LA]1.6 " + " Digite seu email e senha!");
+                }
+
+            }
+            catch(NullPointerException e){
+                Log.d(TAG, "Erro 1: " + e);
+                return false;
+            }
+
+            return true;
 
         }
 
@@ -472,24 +574,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 finish();
             } else {
 
-                if (strBuffer.contains("denied")){
-                     mPasswordView.setError(getString(R.string.text_error_connection));
-                     mPasswordView.requestFocus();
+                try {
 
-                     System.out.println("[LA]4 " + "Acesso negato, volta para o login");
+                    if (mAuth.getCurrentUser().isEmailVerified()) {
+                        mPasswordView.setError(getString(R.string.text_error_connection));
+                        mPasswordView.requestFocus();
 
-                    Toast.makeText(getApplicationContext(), "Problema de conexão ou senha errada!", Toast.LENGTH_SHORT).show();
+                        System.out.println("[LA]4 " + "Acesso negato, volta para o login");
 
-                     // Pode mandar ele de volta para o Login
+                        Toast.makeText(getApplicationContext(), "Problema de conexão ou senha errada!", Toast.LENGTH_SHORT).show();
 
-                }
-                else {
+                        // Pode mandar ele de volta para o Login
 
-                    // Se não teve sucesso, então faça o registro do usuário
+                    } else {
 
-                    System.out.println("[LA]5 " + "Não teve sucesso, fazer cadastro");
+                        // Se não teve sucesso, então faça o registro do usuário
 
-                    Toast.makeText(getApplicationContext(), "Se cadastre para usar!", Toast.LENGTH_SHORT).show();
+                        System.out.println("[LA]5 " + "Não teve sucesso, fazer cadastro");
+
+                        Toast.makeText(getApplicationContext(), "Se cadastre para usar!", Toast.LENGTH_SHORT).show();
+
+                    /*
 
                     Intent reg_intent = new Intent(LoginActivity.this, RegisterActivity.class);
                     Bundle bundleRA = new Bundle();
@@ -501,11 +606,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     reg_intent.putExtras(bundleRA);
                     startActivity(reg_intent);
 
+                */
 
+                        //createUser(email, password);
+                        signUp();
 
-                    finish();
+                        finish();
+                    }
                 }
+                catch(NullPointerException e){
+                    Log.d(TAG, "Erro 1: " + e);
+                    //return false;
 
+                }
 
             }
         }
@@ -516,5 +629,86 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
+
+    // Methods dealing with Firebase
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //updateUI(currentUser);
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+
+        mAuth.signOut();
+
+    }
+
+    public void updateUI(FirebaseUser user){
+
+        Log.d(TAG, "The User is: " + user);
+        //mAuth.updateCurrentUser(user);
+        //createUser(email,password);
+        if (user != null) {
+            res = true;
+            Log.d(TAG, "Res = " + res);
+           // writeIntoFB(count);
+            //mAuth.signOut();
+        }
+        else {
+            res = false;
+            Log.d(TAG, "Res = " + res);
+            mAuth.signOut();
+        }
+
+    }
+
+    public void signInUser(){
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "Autenticado com Sucesso!");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "Falha ao autenticar!", task.getException());
+                            Toast.makeText(LoginActivity.this, "Email ou senha inválidos! (A)",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+
+                        }
+
+                        // ...
+                    }
+                });
+
+    }
+
+
+
+
+    public void signUp(){
+
+        Intent reg_intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        Bundle bundleRA = new Bundle();
+        bundleRA.putString("email", mEmail);
+        bundleRA.putString("password", mPassword);
+        bundleRA.putString("msg", strBuffer);
+        bundleRA.putString("trans", "r");           // Tem que ser transação de cadastro
+        bundleRA.putString("host",strHostL);
+        reg_intent.putExtras(bundleRA);
+        startActivity(reg_intent);
+
+    }
+
 }
 

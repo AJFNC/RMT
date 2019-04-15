@@ -7,11 +7,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +21,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -52,6 +61,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     String rName;
 
+    public static final String TAG = "FB";
+    private FirebaseAuth mAuth;
+    boolean res;
 
     EditText editTextNameR;
     //EditText editTextWhatsappR;
@@ -59,8 +71,11 @@ public class RegisterActivity extends AppCompatActivity {
     String rAction;
 
     String nameToReg;
+    String emailToReg;
     String passToReg;
     //final String repPassToReg;
+
+
 
 
     @Override
@@ -69,6 +84,13 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        // Firebase initialization
+
+        FirebaseApp.initializeApp(this);
+
+        mAuth = FirebaseAuth.getInstance();
 
 
         textViewMsg = findViewById(R.id.textViewMsg);
@@ -83,9 +105,10 @@ public class RegisterActivity extends AppCompatActivity {
             rPass = bundle.getString("password");
             rBuffer = bundle.getString("msg");
             strHost = bundle.getString("host");
+
         }
 
-        rName = rEmail;
+        //rName = rEmail;
 
         textViewMsg.setText(rBuffer);
 
@@ -94,9 +117,10 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-        final EditText editTextNameR = (EditText) findViewById(R.id.editTextName);
-
-
+        final EditText editTextNameR = (EditText) findViewById(R.id.editTextName);              //Esses dados serão registrados no banco de dados
+        final EditText editTextSurNameR = (EditText) findViewById(R.id.editTextSurName);
+        final EditText editTextWhatsappR = (EditText) findViewById(R.id.editTextWhatsapp);
+        final EditText editTextEmailR = (EditText) findViewById(R.id.editTextEmail);
         final EditText editTextPassR = (EditText) findViewById(R.id.editTextPass);
 
 
@@ -135,23 +159,23 @@ public class RegisterActivity extends AppCompatActivity {
 
 
          */
-            textViewMsg.setText(R.string.text1);
+            //textViewMsg.setText(R.string.text1);
 
-            System.out.println("[RA]3 Usuário não existe!");
+            System.out.println("[RA]3 Usuário não existe! Iniciando cadastramento");
 
 
-            Toast.makeText(getApplicationContext(), "Usuário não existe!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Usuário não existe!", Toast.LENGTH_SHORT).show();
 
             sendingRegButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    nameToReg = editTextNameR.getText().toString();
+                    emailToReg = editTextEmailR.getText().toString();
                     passToReg = editTextPassR.getText().toString();
 
-                    System.out.println("[RA]2.1 " + nameToReg + " , " + passToReg);
+                    System.out.println("[RA]2.1 " + emailToReg + " , " + passToReg);
 
-                    rAttemptRegister = new AttemptRegister(nameToReg, passToReg);
+                    rAttemptRegister = new AttemptRegister(emailToReg, passToReg);
                     rAttemptRegister.execute((Void) null);
 
                         //sleepTs(3000);
@@ -218,9 +242,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         String strBufferRA;
 
-        AttemptRegister(String name, String pass){
+        AttemptRegister(String email, String pass){
         //AttemptRegister(String name, String surname, String whtsap, String email, String pass){
-            rName = name;
+            rEmail = email;
             //rSurName = surname;
            // rWhatsapp = whtsap;
             //rEmail = email;
@@ -248,17 +272,18 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 //  String link = "http://192.168.1.176/loginuser.php";
-                String linkA = "http://192.168.1.176:8080/registeruser.php";
+                //String linkA = "http://192.168.1.176:8080/registeruser.php";
                 //String linkB = "http://192.168.1.54/registeruser.php";
-                String linkB = strHost + "registeruser1.php";
+                //String linkB = strHost + "registeruser1.php";
 
 
                 try {
 
 
 
-                    System.out.println("[RA]2.2 " + rName + " , " + rPass);
+                    System.out.println("[RA]2.2 " + rEmail + " , " + rPass);
 
+                    /*
                             String data = URLEncoder.encode("username", "UTF-8") + "=" +
                             URLEncoder.encode(rName, "UTF-8");
                     data += "&" + URLEncoder.encode("password", "UTF-8") + "=" +
@@ -305,14 +330,17 @@ public class RegisterActivity extends AppCompatActivity {
                     strBufferRA = sbuffer.toString();
 
                     System.out.println("[RA]4 " + strBufferRA + "  Resultado do INSERT");
+                    */
+
+                    createUser(rEmail, rPass);
 
                     return true;
 
 
-                } catch (IOException e) {
+                } catch (NullPointerException e) {
 
                     //Deixar comentado para verificar onde esta o problema
-                    strBufferRA = "Exception: " + e.getMessage();
+                    //strBufferRA = "Exception: " + e.getMessage();
 
                     System.out.println("[RA]5 " + "Problema no cadastro remoto " + e.getMessage());
 
@@ -344,7 +372,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Intent log_intent = new Intent(RegisterActivity.this, Activity3.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("trans", "s");      // Após cadastrado com sucesso usuário vai para a transação de venda
-                    bundle.putString("name", rName);
+                    bundle.putString("email", rEmail);
                     bundle.putString("whatsapp", rWhtspp);
                     bundle.putString("host", strHost);
                     log_intent.putExtras(bundle);
@@ -397,5 +425,85 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    // Methods dealing with Firebase
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+
+        //mAuth.signOut();
+
+    }
+
+
+    public  void  createUser(String email, String password) {
+
+
+        System.out.println("[RA]2.3 " + email + " , " + password);
+
+        // Create new user
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "Cadastrado com sucesso!");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.d(TAG, "Falha ao cadastrar!", task.getException());
+                            Toast.makeText(RegisterActivity.this, "Email ou senha inválidos! (C)",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                            sendToLogin();
+                        }
+
+                        // ...
+                    }
+                });
+
+    }
+
+    public void sendToLogin(){
+
+        rAction = "s";
+        Intent log_intent = new Intent(RegisterActivity.this, LoginActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("trans",rAction);
+        bundle.putString("host",strHost);
+        log_intent.putExtras(bundle);
+        startActivity(log_intent);
+
+
+    }
+
+    public void updateUI(FirebaseUser user){
+
+        Log.d(TAG, "The User is: " + user);
+        //mAuth.updateCurrentUser(user);
+        //createUser(email,password);
+        if (user != null) {
+            res = true;
+            Log.d(TAG, "Res = " + res);
+            // writeIntoFB(count);
+            //mAuth.signOut();
+        }
+        else {
+            res = false;
+            Log.d(TAG, "Res = " + res);
+            mAuth.signOut();
+        }
+
+    }
 
 }
