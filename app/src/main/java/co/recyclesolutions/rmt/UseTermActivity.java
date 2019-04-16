@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
@@ -25,6 +27,8 @@ public class UseTermActivity extends AppCompatActivity {
     String termTrans;
     String termHost;
 
+    String termAddress;
+
 
 
     @Override
@@ -33,13 +37,21 @@ public class UseTermActivity extends AppCompatActivity {
         setContentView(R.layout.activity_use_term);
 
 
+        WebView wvRSTerm = findViewById(R.id.webView);
 
-        ScrollView svUseTerm = findViewById(R.id.scrollView2);
-        TextView tvUseTerm = findViewById(R.id.textView10);
+        wvRSTerm.getSettings().setJavaScriptEnabled(true);
+
+        // wvRS.getSettings().setAllowFileAccess(true);
+        wvRSTerm.setWebViewClient(new MyWebViewClient());
+        wvRSTerm.loadUrl("https://recycle-solutions.firebaseapp.com/term");
+
+        //ScrollView svUseTerm = findViewById(R.id.scrollView2);
+        //TextView tvUseTerm = findViewById(R.id.textView10);
         final EditText tvName = findViewById(R.id.editText5);
         final EditText tvWhtspp = findViewById(R.id.editText7);
+        final EditText tvAddress = findViewById(R.id.editText8);
 
-        tvUseTerm.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
+        //tvUseTerm.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
 
 
         Intent intent = getIntent();
@@ -68,6 +80,7 @@ public class UseTermActivity extends AppCompatActivity {
 
                         termName = tvName.getText().toString();
                         termWhtspp = tvWhtspp.getText().toString();
+                        termAddress = tvAddress.getText().toString();
 
                         if (termWhtspp == ""){
 
@@ -77,27 +90,65 @@ public class UseTermActivity extends AppCompatActivity {
                         }
                         else {
 
-                            Toast.makeText(getApplicationContext(), "Você aceitou o termo!", Toast.LENGTH_SHORT).show();
+                            if (termTrans == "s"){
+                                Toast.makeText(getApplicationContext(), "Você aceitou o termo!", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(UseTermActivity.this, ProposalActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putString("term", term);
-                            bundle.putString("name", termName);
-                            bundle.putString("whatsapp", termWhtspp);
+                                //Intent intent = new Intent(UseTermActivity.this, ProposalActivity.class);
+                                Intent intent = new Intent(UseTermActivity.this, ProposalActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("term", term);
+                                bundle.putString("name", termName);
+                                bundle.putString("whatsapp", termWhtspp);
 
-                            bundle.putString("type", termType);
-                            bundle.putString("qty", termQty);
-                            bundle.putString("price", termPrice);
-                            bundle.putString("trans", termTrans);
-                            bundle.putString("host", termHost);
+                                bundle.putString("address", termAddress);
 
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-                            finish();
+                                bundle.putString("type", termType);
+                                bundle.putString("qty", termQty);
+                                bundle.putString("price", termPrice);
+                                bundle.putString("trans", termTrans);
+                                bundle.putString("host", termHost);
+
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                                finish();
+
+                            }
+                            else {
+
+                                Toast.makeText(getApplicationContext(), "Você aceitou o termo!", Toast.LENGTH_SHORT).show();
+
+                                //Intent intent = new Intent(UseTermActivity.this, ProposalActivity.class);
+                                Intent intent = new Intent(UseTermActivity.this, Activity3.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("term", term);
+                                bundle.putString("name", termName);
+                                bundle.putString("whatsapp", termWhtspp);
+
+                                bundle.putString("address", termAddress);
+
+                                bundle.putString("type", termType);
+                                bundle.putString("qty", termQty);
+                                bundle.putString("price", termPrice);
+                                bundle.putString("trans", termTrans);
+                                bundle.putString("host", termHost);
+
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                                finish();
+                            }
                         }
                     }
                 }
         );
+
+    }
+
+    private class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url){
+            view.loadUrl(url);
+            return false;
+        }
 
     }
 

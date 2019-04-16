@@ -31,6 +31,8 @@ public class Activity3 extends AppCompatActivity {
     String a3Term = null;
     String a3Whtspp;
 
+    String a3Address;
+
     String strQty;
     float dQty;
 
@@ -80,6 +82,7 @@ public class Activity3 extends AppCompatActivity {
             clientName = bundle.getString("name");
             a3Term = bundle.getString("term");
             a3Whtspp = bundle.getString("whatsapp");
+            a3Address = bundle.getString("address");
         }
 
         TextView textView = findViewById(R.id.textView);
@@ -305,7 +308,12 @@ public class Activity3 extends AppCompatActivity {
             textView.setText(R.string.trans_transport);
             textView6.setText(R.string.prop_paying);
 
-            editText9.setEnabled(true);
+           // editText9.setEnabled(true);
+
+            editText9.setText(getGeoPrice());
+            editText10.setText("0.00");
+            editText11.setText(getGeoPrice());
+            editText9.setEnabled(false);
 
             Button buttonSend = (Button) findViewById(R.id.button);
             buttonSend.setOnClickListener(
@@ -522,6 +530,9 @@ public class Activity3 extends AppCompatActivity {
             callUseTermAct();
         }
         else if (a3Term.equals("Sim")){
+
+            System.out.println(a3Address);
+
             Intent prop_intent = new Intent(Activity3.this, ProposalActivity.class);
             Bundle bundleProp = new Bundle();
             bundleProp.putString("type", matType);
@@ -531,6 +542,8 @@ public class Activity3 extends AppCompatActivity {
             bundleProp.putString("host", strHostA3);
             bundleProp.putString("name", clientName);
             bundleProp.putString("whatsapp", a3Whtspp);
+            bundleProp.putString("address", a3Address);
+            bundleProp.putString("term", a3Term);
             prop_intent.putExtras(bundleProp);
             startActivity(prop_intent);
         }
@@ -557,7 +570,12 @@ public class Activity3 extends AppCompatActivity {
 
     }
 
+    private String getGeoPrice(){
 
+        String price = "23.85";
+
+        return price;
+    }
 
 
 }

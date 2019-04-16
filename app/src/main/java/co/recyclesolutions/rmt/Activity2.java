@@ -26,6 +26,8 @@ public class Activity2 extends AppCompatActivity {
     String a2Name;
     String a2Whtspp;
 
+    String a2Address;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,7 +125,8 @@ public class Activity2 extends AppCompatActivity {
 
     private void buy(){
         transaction = "b";
-        Intent buy_intent = new Intent(Activity2.this, Activity3.class);
+        //Intent buy_intent = new Intent(Activity2.this, Activity3.class);
+        Intent buy_intent = new Intent(Activity2.this, UseTermActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("trans",transaction);
         bundle.putString("host", host);
@@ -137,7 +140,8 @@ public class Activity2 extends AppCompatActivity {
 
     private void transport(){
         transaction = "t";
-        Intent transport_intent = new Intent(Activity2.this, Activity3.class);
+        //Intent transport_intent = new Intent(Activity2.this, Activity3.class);
+        Intent transport_intent = new Intent(Activity2.this, UseTermActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("trans",transaction);
         bundle.putString("host", host);
@@ -151,7 +155,8 @@ public class Activity2 extends AppCompatActivity {
 
     private void donate(){
         transaction = "d";
-        Intent donate_intent = new Intent(Activity2.this, Activity3.class);
+        //Intent donate_intent = new Intent(Activity2.this, Activity3.class);
+        Intent donate_intent = new Intent(Activity2.this, UseTermActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("trans",transaction);
         bundle.putString("host", host);

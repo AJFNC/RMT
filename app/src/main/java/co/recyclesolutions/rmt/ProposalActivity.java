@@ -33,6 +33,9 @@ public class ProposalActivity extends AppCompatActivity {
     String propHost;
     String propName;
     String propTerm;
+
+    String propAddress;
+
     public String telephone;
     private String transaction;
     public static final String TAG = "FB";
@@ -71,7 +74,7 @@ public class ProposalActivity extends AppCompatActivity {
 
        // wvRS.getSettings().setAllowFileAccess(true);
         wvRS.setWebViewClient(new MyWebViewClient());
-        wvRS.loadUrl("https://recycle-solutions.firebaseapp.com");
+        wvRS.loadUrl("https://recycle-solutions.firebaseapp.com/list");
 
 
 
@@ -93,6 +96,7 @@ public class ProposalActivity extends AppCompatActivity {
             propName = bundle.getString("name");
             telephone = bundle.getString("whatsapp");
             propTerm = bundle.getString("term");
+            propAddress = bundle.getString("address");
 
         }
 
@@ -136,7 +140,7 @@ public class ProposalActivity extends AppCompatActivity {
 
                         if (propTerm.equals("Sim")){
                             System.out.println("[PA] Enviando e-mail! ");
-                            seProp.sendEmail(ProposalActivity.this, propName, telephone, transaction, propType, propQty, propPrice);
+                            seProp.sendEmail(ProposalActivity.this, propName, telephone, transaction, propType, propQty, propPrice, propAddress);
 
                             //count = contPers.getCounter();
                             sendProp();
@@ -211,6 +215,9 @@ public class ProposalActivity extends AppCompatActivity {
 
         root = FirebaseDatabase.getInstance().getReference("transactions/" + userUI + "/" + count + "/" + "name");
         root.setValue(propName);
+
+        root = FirebaseDatabase.getInstance().getReference("transactions/" + userUI + "/" + count + "/" + "address");
+        root.setValue(propAddress);
 
         count++;
         //contPers.setCounter(count);

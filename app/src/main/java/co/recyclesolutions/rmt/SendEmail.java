@@ -12,7 +12,7 @@ import java.util.Date;
 
 class SendEmail {
 
-    public void sendEmail(Activity act, String name, String phone, String transaction, String type, String qty, String price) {
+    public void sendEmail(Activity act, String name, String phone, String transaction, String type, String qty, String price, String address) {
         String[] TO = {"contato@recyclesolutions.co"}; //E-mail address
         String[] CC = {"alexandre.cavalcanti@recyclesolutions.co"};
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
@@ -50,7 +50,7 @@ class SendEmail {
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Proposta à Recycle Solutions - " + phone);
         emailIntent.putExtra(Intent.EXTRA_TEXT, "" +
                 "Sras/Srs\n\n" +
-                "Eu " + name + ", whatsapp nº:" + phone + " venho por meio desta solicitar " + transaction + " de  " + qty + "kilos de " + type + " a um valor total de R$ " + price +
+                "Eu " + name + ", endereço " + address + ", whatsapp nº:" + phone + " venho por meio desta solicitar " + transaction + " de  " + qty + "kilos de " + type + " a um valor total de R$ " + price +
                 "\n\n" +
                 "Atenciosamente,\n\n" + dtToday + "\n\n" +
                 name);

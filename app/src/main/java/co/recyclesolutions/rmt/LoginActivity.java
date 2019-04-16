@@ -401,77 +401,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            /*
-
-            String link = "http://192.168.1.176/loginuser.php";
-            String linkA = "http://192.168.1.176:8080/loginuser.php";
-            //String linkB = "http://192.168.1.54/loginuser.php";
-            String linkB = strHostL + "loginuser.php";
-
-
-
-            try {
-
-
-                String data = URLEncoder.encode("username", "UTF-8") + "=" +
-                        URLEncoder.encode(mEmail, "UTF-8");
-                data += "&" + URLEncoder.encode("password", "UTF-8") + "=" +
-                        URLEncoder.encode(mPassword, "UTF-8");
-
-
-                URL url = new URL(linkB);
-                URLConnection conn = url.openConnection();
-
-                conn.setDoOutput(true);
-
-                OutputStreamWriter wrStrm = new OutputStreamWriter(conn.getOutputStream());
-
-
-                wrStrm.write(data);
-                wrStrm.flush();
-
-
-                BufferedReader rdStrm = new BufferedReader(new
-                        InputStreamReader(conn.getInputStream()));
-
-                StringBuilder sbuffer = new StringBuilder();
-                String line;
-
-
-                // Read Server Response
-                while ((line = rdStrm.readLine()) != null) {
-                    sbuffer.append(line);
-                    //System.out.println(sbuffer);
-                    break;
-                }
-                strBuffer = sbuffer.toString(); //A página loginuser.php retorna o nome do cliente depois de fazer um SELECT na tabela clienes
-
-
-
-                if (strBuffer.equals(email)){   //Não pode ser o userM
-
-                    System.out.println("[LA]1 " + strBuffer + " é o nome do usuario");  //Se obteve sucesso em recuperar o nome igual ao digitado, faça o post execution
-                    return true;
-                }
-
-                return false;
-
-
-            } catch (IOException e) {
-                strBuffer = new String("Exception: " + e.getMessage());
-
-                //Esse catch poderia retornar a string com a mensagem do servidor
-
-                System.out.println("[LA]2 " + strBuffer);
-
-                return false;
-            }
-            */
-
-            // Checking the user entry
-
-            // Check user/pass, if exists write into FB, else create user
-
 
 
             FirebaseUser user = mAuth.getCurrentUser();
@@ -562,7 +491,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 Toast.makeText(getApplicationContext(), "Usuário autorizado!", Toast.LENGTH_SHORT).show();
 
-                Intent log_intent = new Intent(LoginActivity.this, Activity3.class);
+               // Intent log_intent = new Intent(LoginActivity.this, Activity3.class);
+                Intent log_intent = new Intent(LoginActivity.this, UseTermActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("trans",actionL);      // Após cadastrado com sucesso usuário vai para a transação de venda
                 bundle.putString("host",strHostL);
