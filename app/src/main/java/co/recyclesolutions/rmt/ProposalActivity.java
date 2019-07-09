@@ -15,6 +15,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class ProposalActivity extends AppCompatActivity {
 
     String propType;
@@ -37,6 +41,13 @@ public class ProposalActivity extends AppCompatActivity {
         Button sendProposal = findViewById(R.id.button7);
 
         WebView wvRS = findViewById(R.id.webview1);
+
+
+
+
+
+
+
 
         final TelephonyManager tmClient;
 
@@ -83,6 +94,17 @@ public class ProposalActivity extends AppCompatActivity {
         propTextView.append("{" + "\"price\"" + ": " + propPrice + "}\n");
 
 
+        // Mostra um conteudo do Firebase
+
+
+
+
+
+
+
+        //
+
+
 
         sendProposal.setOnClickListener(
                 new View.OnClickListener() {
@@ -115,6 +137,8 @@ public class ProposalActivity extends AppCompatActivity {
                         if (propTerm.equals("Sim")){
                             System.out.println("[PA] Enviando e-mail! ");
                             seProp.sendEmail(ProposalActivity.this, propName, telephone, transaction, propType, propQty, propPrice);
+
+
                         }
 
                         finish();
@@ -125,6 +149,9 @@ public class ProposalActivity extends AppCompatActivity {
 
 
     }
+
+
+
 
 
     private class MyWebViewClient extends WebViewClient {

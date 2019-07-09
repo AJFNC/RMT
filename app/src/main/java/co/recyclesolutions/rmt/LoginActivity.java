@@ -33,6 +33,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/*
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseDatabase;
+import com.firebase.client.DatabaseReference;
+*/
+
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.util.ArrayList;
@@ -95,12 +103,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private TextView textViewLMsg;
 
 
+    // Using Firebase Authentication
+
+    //FirebaseDatabase rmtDatabase = FirebaseDatabase.getInstance();
+   // DatabaseReference rmtRef = rmtDatabase.getReference("name");
+
+    //rmtRef.setValue("Testando!");
+
+   // private FirebaseAuth mAuth;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
+       // FirebaseApp.initializeApp(this);
+       // Firebase.setAndroidContext(this);
+        //rmtDatabase = Firebase.getFirebase();
+
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -137,7 +160,49 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+
+        // Checking the current user
+
+        //mAuth = FirebaseAuth.getInstance();
+
+
     }
+
+
+    // Firebase authentication
+
+/*
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+
+
+    public static Firebase getFirebase(){
+        if( rmtDatabase == null ){
+            rmtDatabase = new Firebase("https://recycle-solutions.firebaseapp.com");
+        }
+        return( rmtDatabase );
+    }
+
+
+
+    private void updateUI(FirebaseUser user) {
+        //hideProgressDialog();
+        if (user != null) {
+            Toast.makeText(getApplicationContext(), "Usuário FB já exite: " + user.getUid(), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Usuário FB não exite: " + user.getEmail(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    */
 
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {

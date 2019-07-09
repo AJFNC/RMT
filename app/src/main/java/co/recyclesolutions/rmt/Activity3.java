@@ -305,7 +305,9 @@ public class Activity3 extends AppCompatActivity {
             textView.setText(R.string.trans_transport);
             textView6.setText(R.string.prop_paying);
 
-            editText9.setEnabled(true);
+            editText11.setText("24.00");
+            editText9.setEnabled(false);
+
 
             Button buttonSend = (Button) findViewById(R.id.button);
             buttonSend.setOnClickListener(
