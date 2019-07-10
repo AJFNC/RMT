@@ -421,6 +421,8 @@ public class Activity3 extends AppCompatActivity {
 
         if (id == R.id.action_settings) {
             finishAffinity();
+            // Sign out the Firebase user
+
             System.exit(0);
 
         }

@@ -367,7 +367,7 @@ public class ProposalActivity extends AppCompatActivity {
     public void onDestroy(){
         super.onDestroy();
 
-        //mAuth.signOut();
+        mAuth.signOut();
 
     }
 }
