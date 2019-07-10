@@ -222,6 +222,8 @@ public class ProposalActivity extends AppCompatActivity {
         count++;
         //contPers.setCounter(count);
         Log.d(TAG, "count = " + count);
+
+        mAuth.signOut();
     }
 
 
@@ -365,9 +367,10 @@ public class ProposalActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy(){
-        super.onDestroy();
 
         mAuth.signOut();
+
+        super.onDestroy();
 
     }
 }
