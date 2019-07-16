@@ -1,5 +1,6 @@
 package co.recyclesolutions.rmt;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,7 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.app.AlertDialog;
 
 // This Activity is the Negociation class
 
@@ -46,6 +47,7 @@ public class Activity3 extends AppCompatActivity {
     float dYouEarn;
 
     String matType = "";
+    String qualMetal ="";
 
 
     protected EditText editText1;
@@ -235,6 +237,40 @@ public class Activity3 extends AppCompatActivity {
 
                 matType = "Metal";
 
+
+                //Dalog para pegar qualMetal
+
+                final CharSequence[] metal = {"Alumínio", "Cobre", "Ferro"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(Activity3.this);
+                builder.setTitle("Selecione um Metal");
+                builder.setItems(metal, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int selecionado) {
+                        Toast.makeText(Activity3.this, "Metal Selecionado: " + metal[selecionado],
+                                Toast.LENGTH_SHORT).show();
+                        switch (selecionado){
+
+                            case 0:
+                                qualMetal = "Alumínio";
+                                break;
+
+                            case 1:
+                                qualMetal = "Cobre";
+                                break;
+
+                            case 2:
+                                qualMetal = "Ferro";
+                                break;
+
+                        }
+
+
+                    }
+                });
+                builder.create().show();
+
+                //
+
+
             }
         });
 
@@ -421,6 +457,8 @@ public class Activity3 extends AppCompatActivity {
 
         if (id == R.id.action_settings) {
             finishAffinity();
+            // Sign out the Firebase user
+
             System.exit(0);
 
         }
@@ -511,6 +549,11 @@ public class Activity3 extends AppCompatActivity {
                 dQty = getdQty(strQty);
                 strPrice = editText9.getText().toString();
                 dPrice = getdPrice(strPrice);
+
+                //Colopcar o valor da string qualMetal em matType
+
+                matType = qualMetal;
+
                 break;
             case "Outros":
                 strQty = editText6.getText().toString();

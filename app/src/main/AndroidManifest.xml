@@ -16,11 +16,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProposalActivity"></activity>
-        <activity android:name=".UseTermActivity" />
-        <activity android:name=".ConfigActivity" />
+        <activity android:name=".ProposalActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name=".UseTermActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".ConfigActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".Activity1"
+            android:screenOrientation="portrait"
             android:theme="@style/AppCompat.RealFullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,17 +37,21 @@
         </activity>
         <activity
             android:name=".LoginActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_login" />
         <activity
             android:name=".Activity2"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity3"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_3"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RegisterActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
