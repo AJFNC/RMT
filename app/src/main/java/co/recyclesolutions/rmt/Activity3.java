@@ -47,7 +47,10 @@ public class Activity3 extends AppCompatActivity {
     float dYouEarn;
 
     String matType = "";
-    String qualMetal ="";
+    String qualMetal = "";
+    String qualDef = "";
+    String qualPeca = "";
+    String qualRes = "";
 
 
     protected EditText editText1;
@@ -147,13 +150,17 @@ public class Activity3 extends AppCompatActivity {
                     editText4.setText("");
                     editText6.setText("");
 
+                    editText9.setText("");
+                    editText10.setText("");
+                    editText11.setText("");
+
                     checkBox2.setChecked(false);
                     checkBox3.setChecked(false);
                     checkBox4.setChecked(false);
                     checkBox6.setChecked(false);
                 }
 
-                matType = "Papel";
+                matType = "Adubos";
             }
         });
 
@@ -175,13 +182,17 @@ public class Activity3 extends AppCompatActivity {
                     editText4.setText("");
                     editText6.setText("");
 
+                    editText9.setText("");
+                    editText10.setText("");
+                    editText11.setText("");
+
                     checkBox1.setChecked(false);
                     checkBox3.setChecked(false);
                     checkBox4.setChecked(false);
                     checkBox6.setChecked(false);
                 }
 
-                matType = "Plastico";
+                matType = "Adubos foliares";
             }
         });
 
@@ -202,13 +213,79 @@ public class Activity3 extends AppCompatActivity {
                     editText4.setText("");
                     editText6.setText("");
 
+                    editText9.setText("");
+                    editText10.setText("");
+                    editText11.setText("");
+
                     checkBox1.setChecked(false);
                     checkBox2.setChecked(false);
                     checkBox4.setChecked(false);
                     checkBox6.setChecked(false);
+
+                    //Dialog para pegar qualRes
+
+                    final CharSequence[] resid = {"Papel","Papelão","Plástico", "Vidro","Alumínio", "Cobre","Ferro", "Madeira", "Óleo", "Orgânico"};
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Activity3.this);
+                    builder.setTitle("Selecione um Resíduo");
+                    builder.setItems(resid, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int selecionado) {
+                            Toast.makeText(Activity3.this, "Resíduo Selecionado: " + resid[selecionado],
+                                    Toast.LENGTH_SHORT).show();
+                            switch (selecionado){
+
+                                case 0:
+                                    qualRes = "Papel";
+                                    break;
+
+                                case 1:
+                                    qualRes = "Papelão";
+                                    break;
+
+                                case 2:
+                                    qualRes = "Plástico";
+                                    break;
+
+                                case 3:
+                                    qualRes = "Vidro";
+                                    break;
+
+                                case 4:
+                                    qualRes = "Alumínio";
+                                    break;
+
+                                case 5:
+                                    qualRes = "Cobre";
+                                    break;
+
+                                case 6:
+                                    qualRes = "Ferro";
+                                    break;
+
+                                case 7:
+                                    qualRes = "Madeira";
+                                    break;
+
+                                case 8:
+                                    qualRes = "Óleo";
+                                    break;
+
+                                case 9:
+                                    qualRes = "Orgânico";
+                                    break;
+
+
+                            }
+
+
+                        }
+                    });
+                    builder.create().show();
+
+                    //
+
                 }
 
-                matType = "Vidro";
+                matType = "Resíduos";
             }
         });
 
@@ -229,46 +306,56 @@ public class Activity3 extends AppCompatActivity {
                     editText3.setText("");
                     editText6.setText("");
 
+                    editText9.setText("");
+                    editText10.setText("");
+                    editText11.setText("");
+
                     checkBox1.setChecked(false);
                     checkBox2.setChecked(false);
                     checkBox3.setChecked(false);
                     checkBox6.setChecked(false);
-                }
-
-                matType = "Metal";
 
 
-                //Dalog para pegar qualMetal
+                    //Dialog para pegar qualDef
 
-                final CharSequence[] metal = {"Alumínio", "Cobre", "Ferro"};
-                AlertDialog.Builder builder = new AlertDialog.Builder(Activity3.this);
-                builder.setTitle("Selecione um Metal");
-                builder.setItems(metal, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int selecionado) {
-                        Toast.makeText(Activity3.this, "Metal Selecionado: " + metal[selecionado],
-                                Toast.LENGTH_SHORT).show();
-                        switch (selecionado){
+                    final CharSequence[] defen = {"Inseticida", "Fungicida", "Herbicida", "Regulador cresc"};
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Activity3.this);
+                    builder.setTitle("Selecione um Defensivo");
+                    builder.setItems(defen, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int selecionado) {
+                            Toast.makeText(Activity3.this, "Defensivo Selecionado: " + defen[selecionado],
+                                    Toast.LENGTH_SHORT).show();
+                            switch (selecionado){
 
-                            case 0:
-                                qualMetal = "Alumínio";
-                                break;
+                                case 0:
+                                    qualDef = "Inseticida";
+                                    break;
 
-                            case 1:
-                                qualMetal = "Cobre";
-                                break;
+                                case 1:
+                                    qualDef = "Fungicida";
+                                    break;
 
-                            case 2:
-                                qualMetal = "Ferro";
-                                break;
+                                case 2:
+                                    qualDef = "Herbicida";
+                                    break;
+
+                                case 3:
+                                    qualDef = "Regulador cresc";
+                                    break;
+                            }
+
 
                         }
+                    });
+                    builder.create().show();
+
+                    //
 
 
-                    }
-                });
-                builder.create().show();
+                }
 
-                //
+                matType = "Defensivos";
+
 
 
             }
@@ -291,13 +378,58 @@ public class Activity3 extends AppCompatActivity {
                     editText3.setText("");
                     editText4.setText("");
 
+                    editText9.setText("");
+                    editText10.setText("");
+                    editText11.setText("");
+
                     checkBox1.setChecked(false);
                     checkBox2.setChecked(false);
                     checkBox3.setChecked(false);
                     checkBox4.setChecked(false);
+
+                    //Dialog para pegar qualPeca
+
+                    final CharSequence[] peca = {"Peça de Trator", "Peça de Pulverizador", "Material de irrigação", "EPI"};
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Activity3.this);
+                    builder.setTitle("Selecione uma Peça");
+                    builder.setItems(peca, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int selecionado) {
+                            Toast.makeText(Activity3.this, "Peça Selecionado: " + peca[selecionado],
+                                    Toast.LENGTH_SHORT).show();
+                            switch (selecionado){
+
+                                case 0:
+                                    qualPeca = "Peça de Trator";
+                                    break;
+
+                                case 1:
+                                    qualPeca = "Peça de Pulverizador";
+                                    break;
+
+                                case 2:
+                                    qualPeca = "Material de irrigação";
+                                    break;
+
+                                case 3:
+                                    qualPeca = "EPI";
+                                    break;
+                            }
+
+
+                        }
+                    });
+                    builder.create().show();
+
+                    //
+
+
+
                 }
 
-                matType = "Outros";
+                matType = "Peças";
+
+
+
             }
         });
 
@@ -403,11 +535,11 @@ public class Activity3 extends AppCompatActivity {
                 float tmpPrice = getdPrice(strCost);
 
                 if (transaction.equals("s")){
-                    dCost = (float) (tmpPrice * 0.1);
+                    dCost = (float) (tmpPrice * 0); //Who sells, doesn't pay
                     dYouEarn = tmpPrice - dCost;
                 }
                 else {
-                    dCost = (float) (tmpPrice * 0.1);
+                    dCost = (float) (tmpPrice * 0.1);   //Who buys, pays
                     dYouEarn = tmpPrice + dCost;
                 }
                 editText10.setText(Float.toString(dCost));
@@ -526,40 +658,46 @@ public class Activity3 extends AppCompatActivity {
 
         switch (matType){
 
-            case "Papel":
+            case "Adubos":
                 strQty = editText1.getText().toString();
                 dQty = getdQty(strQty);
-                strPrice = editText9.getText().toString();
+                strPrice = editText11.getText().toString();
                 dPrice = getdPrice(strPrice);
                 break;
-            case "Plastico":
+            case "Adubos foliares":
                 strQty = editText2.getText().toString();
                 dQty = getdQty(strQty);
-                strPrice = editText9.getText().toString();
+                strPrice = editText11.getText().toString();
                 dPrice = getdPrice(strPrice);
                 break;
-            case "Vidro":
+            case "Resíduos":
                 strQty = editText3.getText().toString();
                 dQty = getdQty(strQty);
-                strPrice = editText9.getText().toString();
+                strPrice = editText11.getText().toString();
                 dPrice = getdPrice(strPrice);
+
+                matType = qualRes;
+
                 break;
-            case "Metal":
+            case "Defensivos":
                 strQty = editText4.getText().toString();
                 dQty = getdQty(strQty);
-                strPrice = editText9.getText().toString();
+                strPrice = editText11.getText().toString();
                 dPrice = getdPrice(strPrice);
 
                 //Colopcar o valor da string qualMetal em matType
 
-                matType = qualMetal;
+                matType = qualDef;
 
                 break;
-            case "Outros":
+            case "Peças":
                 strQty = editText6.getText().toString();
                 dQty = getdQty(strQty);
-                strPrice = editText9.getText().toString();
+                strPrice = editText11.getText().toString();
                 dPrice = getdPrice(strPrice);
+
+                matType = qualPeca;
+
             //default:
              //   finish();
         }
