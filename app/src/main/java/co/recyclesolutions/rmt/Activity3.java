@@ -51,6 +51,8 @@ public class Activity3 extends AppCompatActivity {
     String qualDef = "";
     String qualPeca = "";
     String qualRes = "";
+    String qualPro = "";
+    String qualAdu = "";
 
 
     protected EditText editText1;
@@ -149,15 +151,46 @@ public class Activity3 extends AppCompatActivity {
                     editText3.setText("");
                     editText4.setText("");
                     editText6.setText("");
-
+/**
                     editText9.setText("");
                     editText10.setText("");
                     editText11.setText("");
-
+*/
                     checkBox2.setChecked(false);
                     checkBox3.setChecked(false);
                     checkBox4.setChecked(false);
                     checkBox6.setChecked(false);
+
+
+                    //Dialog para pegar qualDef
+
+                    final CharSequence[] adubo = {"Adubo", "Adubo foliar"};
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Activity3.this);
+                    builder.setTitle("Selecione um Fertilizante");
+                    builder.setItems(adubo, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int selecionado) {
+                            Toast.makeText(Activity3.this, "Fertilizante Selecionado: " + adubo[selecionado],
+                                    Toast.LENGTH_SHORT).show();
+                            switch (selecionado){
+
+                                case 0:
+                                    qualAdu = "Adubo";
+                                    break;
+
+                                case 1:
+                                    qualAdu = "Adubo foliar";
+                                    break;
+
+                            }
+
+
+                        }
+                    });
+                    builder.create().show();
+
+                    //
+
+
                 }
 
                 matType = "Adubos";
@@ -181,18 +214,83 @@ public class Activity3 extends AppCompatActivity {
                     editText3.setText("");
                     editText4.setText("");
                     editText6.setText("");
-
+/**
                     editText9.setText("");
                     editText10.setText("");
                     editText11.setText("");
-
+*/
                     checkBox1.setChecked(false);
                     checkBox3.setChecked(false);
                     checkBox4.setChecked(false);
                     checkBox6.setChecked(false);
+
+
+                    //Dialog para pegar qualRes
+
+                    final CharSequence[] produ = {"Uva","Manga", "Acerola","Côco", "Goiaba","Maracujá", "Banana", "Tomate", "Macaxeira", "Cebola"};
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Activity3.this);
+                    builder.setTitle("Selecione um Resíduo");
+                    builder.setItems(produ, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int selecionado) {
+                            Toast.makeText(Activity3.this, "Produto Selecionado: " + produ[selecionado],
+                                    Toast.LENGTH_SHORT).show();
+                            switch (selecionado){
+
+                                case 0:
+                                    qualPro = "Uva";
+                                    break;
+
+                                case 1:
+                                    qualPro = "Manga";
+                                    break;
+
+                                case 2:
+                                    qualPro = "Acerola";
+                                    break;
+
+                                case 3:
+                                    qualPro = "Côco";
+                                    break;
+
+                                case 4:
+                                    qualPro = "Goiaba";
+                                    break;
+
+                                case 5:
+                                    qualPro = "Maracujá";
+                                    break;
+
+                                case 6:
+                                    qualPro = "Banana";
+                                    break;
+
+                                case 7:
+                                    qualPro = "Tomate";
+                                    break;
+
+                                case 8:
+                                    qualPro = "Macaxeira";
+                                    break;
+
+                                case 9:
+                                    qualPro = "Cebola";
+                                    break;
+
+
+                            }
+
+
+                        }
+                    });
+                    builder.create().show();
+
+                    //
+
+
+
                 }
 
-                matType = "Adubos foliares";
+                matType = "Produtos agrícolas";
             }
         });
 
@@ -212,11 +310,11 @@ public class Activity3 extends AppCompatActivity {
                     editText2.setText("");
                     editText4.setText("");
                     editText6.setText("");
-
+/**
                     editText9.setText("");
                     editText10.setText("");
                     editText11.setText("");
-
+*/
                     checkBox1.setChecked(false);
                     checkBox2.setChecked(false);
                     checkBox4.setChecked(false);
@@ -305,11 +403,11 @@ public class Activity3 extends AppCompatActivity {
                     editText2.setText("");
                     editText3.setText("");
                     editText6.setText("");
-
+/**
                     editText9.setText("");
                     editText10.setText("");
                     editText11.setText("");
-
+*/
                     checkBox1.setChecked(false);
                     checkBox2.setChecked(false);
                     checkBox3.setChecked(false);
@@ -340,7 +438,7 @@ public class Activity3 extends AppCompatActivity {
                                     break;
 
                                 case 3:
-                                    qualDef = "Regulador cresc";
+                                    qualDef = "Regulador crescimento";
                                     break;
                             }
 
@@ -377,11 +475,11 @@ public class Activity3 extends AppCompatActivity {
                     editText2.setText("");
                     editText3.setText("");
                     editText4.setText("");
-
+/**
                     editText9.setText("");
                     editText10.setText("");
                     editText11.setText("");
-
+*/
                     checkBox1.setChecked(false);
                     checkBox2.setChecked(false);
                     checkBox3.setChecked(false);
@@ -476,12 +574,13 @@ public class Activity3 extends AppCompatActivity {
             textView.setText(R.string.trans_transport);
             textView6.setText(R.string.prop_paying);
 
-           // editText9.setEnabled(true);
+            //editText11.setEnabled(true);
 
             editText9.setText(getGeoPrice());
             editText10.setText("0.00");
             editText11.setText(getGeoPrice());
             editText9.setEnabled(false);
+            //editText11.setEnabled(false);
 
             Button buttonSend = (Button) findViewById(R.id.button);
             buttonSend.setOnClickListener(
@@ -663,12 +762,18 @@ public class Activity3 extends AppCompatActivity {
                 dQty = getdQty(strQty);
                 strPrice = editText11.getText().toString();
                 dPrice = getdPrice(strPrice);
+
+                matType = qualAdu;
+
                 break;
-            case "Adubos foliares":
+            case "Produtos agrícolas":
                 strQty = editText2.getText().toString();
                 dQty = getdQty(strQty);
                 strPrice = editText11.getText().toString();
                 dPrice = getdPrice(strPrice);
+
+                matType = qualPro;
+
                 break;
             case "Resíduos":
                 strQty = editText3.getText().toString();
@@ -685,7 +790,7 @@ public class Activity3 extends AppCompatActivity {
                 strPrice = editText11.getText().toString();
                 dPrice = getdPrice(strPrice);
 
-                //Colopcar o valor da string qualMetal em matType
+                //Colopcar o valor da string qualDef em matType
 
                 matType = qualDef;
 
