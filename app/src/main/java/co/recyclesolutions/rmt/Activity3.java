@@ -78,6 +78,8 @@ public class Activity3 extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+
+
         // Pega a transação solicitada
 
         Intent intent = getIntent();
@@ -151,11 +153,11 @@ public class Activity3 extends AppCompatActivity {
                     editText3.setText("");
                     editText4.setText("");
                     editText6.setText("");
-/**
+
                     editText9.setText("");
                     editText10.setText("");
                     editText11.setText("");
-*/
+
                     checkBox2.setChecked(false);
                     checkBox3.setChecked(false);
                     checkBox4.setChecked(false);
@@ -214,11 +216,11 @@ public class Activity3 extends AppCompatActivity {
                     editText3.setText("");
                     editText4.setText("");
                     editText6.setText("");
-/**
+
                     editText9.setText("");
                     editText10.setText("");
                     editText11.setText("");
-*/
+
                     checkBox1.setChecked(false);
                     checkBox3.setChecked(false);
                     checkBox4.setChecked(false);
@@ -310,11 +312,11 @@ public class Activity3 extends AppCompatActivity {
                     editText2.setText("");
                     editText4.setText("");
                     editText6.setText("");
-/**
+
                     editText9.setText("");
                     editText10.setText("");
                     editText11.setText("");
-*/
+
                     checkBox1.setChecked(false);
                     checkBox2.setChecked(false);
                     checkBox4.setChecked(false);
@@ -403,11 +405,11 @@ public class Activity3 extends AppCompatActivity {
                     editText2.setText("");
                     editText3.setText("");
                     editText6.setText("");
-/**
+
                     editText9.setText("");
                     editText10.setText("");
                     editText11.setText("");
-*/
+
                     checkBox1.setChecked(false);
                     checkBox2.setChecked(false);
                     checkBox3.setChecked(false);
@@ -475,11 +477,11 @@ public class Activity3 extends AppCompatActivity {
                     editText2.setText("");
                     editText3.setText("");
                     editText4.setText("");
-/**
+
                     editText9.setText("");
                     editText10.setText("");
                     editText11.setText("");
-*/
+
                     checkBox1.setChecked(false);
                     checkBox2.setChecked(false);
                     checkBox3.setChecked(false);

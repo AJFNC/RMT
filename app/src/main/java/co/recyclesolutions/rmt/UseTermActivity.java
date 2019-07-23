@@ -37,13 +37,13 @@ public class UseTermActivity extends AppCompatActivity {
         setContentView(R.layout.activity_use_term);
 
 
-        WebView wvRSTerm = findViewById(R.id.webView);
+        //WebView wvRSTerm = findViewById(R.id.webView);
 
-        wvRSTerm.getSettings().setJavaScriptEnabled(true);
+       // wvRSTerm.getSettings().setJavaScriptEnabled(true);
 
         // wvRS.getSettings().setAllowFileAccess(true);
-        wvRSTerm.setWebViewClient(new MyWebViewClient());
-        wvRSTerm.loadUrl("https://recycle-solutions.firebaseapp.com/term");
+        //wvRSTerm.setWebViewClient(new MyWebViewClient());
+        //wvRSTerm.loadUrl("https://recycle-solutions.firebaseapp.com/term");
 
         //ScrollView svUseTerm = findViewById(R.id.scrollView2);
         //TextView tvUseTerm = findViewById(R.id.textView10);
@@ -117,8 +117,8 @@ public class UseTermActivity extends AppCompatActivity {
 
                                 Toast.makeText(getApplicationContext(), "Você aceitou o termo!", Toast.LENGTH_SHORT).show();
 
-                                //Intent intent = new Intent(UseTermActivity.this, ProposalActivity.class);
-                                Intent intent = new Intent(UseTermActivity.this, Activity3.class);
+                                Intent intent = new Intent(UseTermActivity.this, ProposalActivity.class);
+                                //Intent intent = new Intent(UseTermActivity.this, Activity3.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putString("term", term);
                                 bundle.putString("name", termName);

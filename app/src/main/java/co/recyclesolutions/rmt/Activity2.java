@@ -113,7 +113,8 @@ public class Activity2 extends AppCompatActivity {
 
     private void sell(){
         transaction = "s";
-        Intent log_intent = new Intent(Activity2.this, LoginActivity.class);
+        Intent log_intent = new Intent(Activity2.this, Activity3.class);
+        //Intent log_intent = new Intent(Activity2.this, LoginActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("trans",transaction);
         bundle.putString("host",host);
@@ -125,8 +126,8 @@ public class Activity2 extends AppCompatActivity {
 
     private void buy(){
         transaction = "b";
-        //Intent buy_intent = new Intent(Activity2.this, Activity3.class);
-        Intent buy_intent = new Intent(Activity2.this, UseTermActivity.class);
+        Intent buy_intent = new Intent(Activity2.this, Activity3.class);
+        //Intent buy_intent = new Intent(Activity2.this, UseTermActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("trans",transaction);
         bundle.putString("host", host);
@@ -140,8 +141,8 @@ public class Activity2 extends AppCompatActivity {
 
     private void transport(){
         transaction = "t";
-        //Intent transport_intent = new Intent(Activity2.this, Activity3.class);
-        Intent transport_intent = new Intent(Activity2.this, UseTermActivity.class);
+        Intent transport_intent = new Intent(Activity2.this, Activity3.class);
+        //Intent transport_intent = new Intent(Activity2.this, UseTermActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("trans",transaction);
         bundle.putString("host", host);
@@ -155,8 +156,8 @@ public class Activity2 extends AppCompatActivity {
 
     private void donate(){
         transaction = "d";
-        //Intent donate_intent = new Intent(Activity2.this, Activity3.class);
-        Intent donate_intent = new Intent(Activity2.this, UseTermActivity.class);
+        Intent donate_intent = new Intent(Activity2.this, Activity3.class);
+        //Intent donate_intent = new Intent(Activity2.this, UseTermActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("trans",transaction);
         bundle.putString("host", host);
