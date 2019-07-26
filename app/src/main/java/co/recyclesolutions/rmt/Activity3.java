@@ -229,9 +229,9 @@ public class Activity3 extends AppCompatActivity {
 
                     //Dialog para pegar qualRes
 
-                    final CharSequence[] produ = {"Uva","Manga", "Acerola","Côco", "Goiaba","Maracujá", "Banana", "Tomate", "Macaxeira", "Cebola"};
+                    final CharSequence[] produ = {"Uva","Manga", "Acerola","Côco", "Goiaba","Maracujá", "Banana", "Tomate", "Macaxeira", "Cebola", "Outro"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(Activity3.this);
-                    builder.setTitle("Selecione um Resíduo");
+                    builder.setTitle("Selecione um Produto");
                     builder.setItems(produ, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int selecionado) {
                             Toast.makeText(Activity3.this, "Produto Selecionado: " + produ[selecionado],
@@ -276,6 +276,10 @@ public class Activity3 extends AppCompatActivity {
 
                                 case 9:
                                     qualPro = "Cebola";
+                                    break;
+
+                                case 10:
+                                    qualPro = "Outro";
                                     break;
 
 

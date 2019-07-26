@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -36,7 +38,17 @@ public class Activity2 extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        ///////// Se parar o problema estará aqui
+        // Web page de propaganda
+
+        WebView wvRSTerm = findViewById(R.id.webViewAD);
+
+        wvRSTerm.getSettings().setJavaScriptEnabled(true);
+
+        //wvRS.getSettings().setAllowFileAccess(true);
+        //wvRSTerm.setWebViewClient(new MyWebViewClient());
+        //wvRSTerm.loadUrl("https://recycle-solutions.firebaseapp.com/");
+
+        wvRSTerm.loadUrl("file:///android_asset/Marketplace - RS.html");
 
 
         //Recebe o www. ou o IP do Host com o aplicativo web e o banco de dados MySQL
