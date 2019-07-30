@@ -1,6 +1,9 @@
 package co.recyclesolutions.rmt;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -44,11 +47,25 @@ public class Activity2 extends AppCompatActivity {
 
         wvRSTerm.getSettings().setJavaScriptEnabled(true);
 
-        //wvRS.getSettings().setAllowFileAccess(true);
-        //wvRSTerm.setWebViewClient(new MyWebViewClient());
-        //wvRSTerm.loadUrl("https://recycle-solutions.firebaseapp.com/");
+        if(isConnected()){
 
-        wvRSTerm.loadUrl("file:///android_asset/Marketplace - RS.html");
+
+
+            //wvRS.getSettings().setAllowFileAccess(true);
+            //wvRSTerm.setWebViewClient(new MyWebViewClient());
+
+
+            wvRSTerm.loadUrl("https://recycle-solutions.firebaseapp.com/adweb.html");
+
+            //wvRSTerm.loadUrl("file:///android_asset/adweb.html");
+
+        }
+        else{
+
+            wvRSTerm.loadUrl("file:///android_asset/Marketplace - RS.html");
+
+        }
+
 
 
         //Recebe o www. ou o IP do Host com o aplicativo web e o banco de dados MySQL
@@ -118,6 +135,15 @@ public class Activity2 extends AppCompatActivity {
 
 
     // Metodos implementados
+
+
+    // Testar a conexão
+
+    public boolean isConnected() {
+        ConnectivityManager connM = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netStatus = connM.getActiveNetworkInfo();
+        return netStatus != null && netStatus.isConnectedOrConnecting();
+    }
 
 
 
