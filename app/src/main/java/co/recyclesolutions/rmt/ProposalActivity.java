@@ -2,10 +2,12 @@ package co.recyclesolutions.rmt;
 
 import android.app.Application;
 import android.content.Intent;
+import android.net.http.SslError;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
@@ -31,7 +33,6 @@ import com.mercadopago.android.px.model.Payment;
 import com.mercadopago.android.px.model.exceptions.MercadoPagoError;
 
 
-//import com.mercadopago.core.MercadoPagoCheckout.*;
 
 //import static android.os.Build.VERSION.SDK;
 
@@ -84,13 +85,6 @@ public class ProposalActivity extends AppCompatActivity {
         final SendEmail seProp = new SendEmail();
 
 
-        //WebSettings wsRS = wvRS.getSettings();
-        wvRS.getSettings().setJavaScriptEnabled(true);
-
-       // wvRS.getSettings().setAllowFileAccess(true);
-        wvRS.setWebViewClient(new MyWebViewClient());
-        //wvRS.loadUrl("https://recycle-solutions.firebaseapp.com/list");
-        wvRS.loadUrl("https://recyclesolutions.co/marketplace.html");
 
 
 
@@ -115,6 +109,35 @@ public class ProposalActivity extends AppCompatActivity {
 
         }
 
+
+
+        //WebSettings wsRS = wvRS.getSettings();
+        wvRS.getSettings().setJavaScriptEnabled(true);
+
+        // wvRS.getSettings().setAllowFileAccess(true);
+        wvRS.setWebViewClient(new MyWebViewClient(){
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                handler.proceed();
+            }
+        });
+        //wvRS.loadUrl("https://recycle-solutions.firebaseapp.com/list");
+
+
+
+        if(transaction.equals("b")){
+
+            wvRS.loadUrl("https://pag.ae/7Vdb1fog7");
+            //wvRS.loadUrl("https://pagseguro.uol.com.br/checkout/nc/sender-identification.jhtml?t=e0c9a68ac0ba92cadec79dd03ba9fcb36767625b7e42dd07&e=true");
+
+        }
+        else{
+            wvRS.loadUrl("https://recyclesolutions.co/marketplace.html");
+        }
+
+
+
+
         propTextView.append("{" + "\"trans\"" + ": " + "\"" + transaction + "\"" + "}\n");
         propTextView.append("{" + "\"type\"" + ": " + "\"" + propType + "\"" + "}\n");
         propTextView.append("{" + "\"qty\"" + ": " + propQty + "}\n");
@@ -127,30 +150,6 @@ public class ProposalActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                        /*
-
-                        if (ActivityCompat.checkSelfPermission(ProposalActivity.this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ProposalActivity.this, Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ProposalActivity.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-                            // TODO: Consider calling
-                            //    ActivityCompat#requestPermissions
-                            // here to request the missing permissions, and then overriding
-                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                            //                                          int[] grantResults)
-                            // to handle the case where the user grants the permission. See the documentation
-                            // for ActivityCompat#requestPermissions for more details.
-
-                            return;
-                        }
-
-                        try {
-                            telephony = tmClient.getLine1Number();
-                        }
-                        catch(NullPointerException e){
-                            Toast.makeText(getApplicationContext(), "Usuário não permitiu acesso ao número do celular!!", Toast.LENGTH_SHORT).show();
-                        }
-
-                        */
-
-
 
 
                         if (propTerm.equals("Sim")){
@@ -159,6 +158,10 @@ public class ProposalActivity extends AppCompatActivity {
 
                             // Manda a proposta para o Firebase
                             sendProp();
+
+
+
+
 
                             // Se a transação for de "Compra" efetue o pagamento primeiro
                             if (transaction.equals("b")){
